@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boram.mapper.boardArticleMapper">
+
+    <insert id="insertBoardArticle" parameterType="com.boram.domain.BoardArticleVO">
+        <selectKey keyProperty="seq_ba_id" resultType="int" order="BEFORE">
+            select seq_ba_id.nextval from dual;
+        </selectKey>
+        insert into board_article (ba_id, ba_title, ba_contents, ba_insert_dt, ba_read_count, ba_password)
+        values (
+                   #{seq_ba_id}
+                   #{baTitle},
+                   #{baContents},
+                   NOW(),
+                   0,
+                   #{baPassword}
+               );
+    </insert>
+
+    <select id="selectBoardArticleList" resultType="com.boram.domain.BoardArticleVO">
+SELECT a.ba_id, a.ba_title, a.ba_contents, a.ba_insert_dt, a.ba_read_count,
+       a.ba_password
+  FROM board_article a
+ WHERE 1 = 1
+    </select>
+
+
+</mapper>

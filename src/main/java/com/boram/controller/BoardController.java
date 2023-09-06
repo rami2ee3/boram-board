@@ -1,20 +1,26 @@
 package com.boram.controller;
 
+import com.boram.domain.BoardArticleVO;
+import com.boram.service.BoardArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
+import java.util.List;
 
 @Controller
 public class BoardController {
 
-//    @Autowired
-//    private DataSource ds;
+    @Autowired
+    private BoardArticleService boardArticleService;
 
     @GetMapping("/")
-    public String main() {
+    public String main(Model model) throws Exception {
+        List<BoardArticleVO> boardArticleVOList = boardArticleService.selectBoardArticleList();
+
+        model.addAttribute("boardList", boardArticleVOList);
+
         return "main";
     }
 
@@ -32,18 +38,5 @@ public class BoardController {
     public String modify() {
         return "modify";
     }
-
-//    @GetMapping("/dbtest")
-//    public String dbtest() {
-//
-//
-//        try(Connection con = ds.getConnection()){
-//            System.out.println(con);
-//        }catch(Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return "main";
-//    }
 
 }

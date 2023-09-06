@@ -14,7 +14,7 @@
     <annotation-driven/>
 
     <!-- Component Scan 패키지 설정 -->
-    <context:component-scan base-package="com.boram.controller"/>
+    <context:component-scan base-package="com.boram"/>
 
     <!-- 뷰 prefix, suffix 설정 -->
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

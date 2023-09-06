@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 
 <%@include file="./include/header.jsp" %>
@@ -26,39 +28,21 @@
         <th scope="col">제목</th>
         <th scope="col">작성자</th>
         <th scope="col">작성일</th>
+        <th scope="col">조회수</th>
     </tr>
     </thead>
     <tbody>
+    <c:forEach var="list" items="${boardList}">
     <tr>
         <th scope="row">1</th>
-        <td>제목1</td>
-        <td>신보람</td>
-        <td>2023.09.01</td>
+        <td>${list.baTitle}</td>
+        <td>${list.baPassword}</td>
+        <td>
+            <fmt:formatDate value="${list.baInsertDt}" pattern="yyyy.mm.dd"/>
+        </td>
+        <td>${list.baReadCount}</td>
     </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>제목2</td>
-        <td>정의석</td>
-        <td>2023.09.02</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>제목3</td>
-        <td>허진영</td>
-        <td>2023.09.03</td>
-    </tr>
-    <tr>
-        <th scope="row">4</th>
-        <td>제목4</td>
-        <td>나진영</td>
-        <td>2023.09.04</td>
-    </tr>
-    <tr>
-        <th scope="row">5</th>
-        <td>제목5</td>
-        <td>이준규</td>
-        <td>2023.09.05</td>
-    </tr>
+    </c:forEach>
     </tbody>
 </table>
 
