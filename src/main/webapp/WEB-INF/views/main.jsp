@@ -26,7 +26,6 @@
     <tr>
         <th scope="col">글 번호</th>
         <th scope="col">제목</th>
-        <th scope="col">작성자</th>
         <th scope="col">작성일</th>
         <th scope="col">조회수</th>
     </tr>
@@ -36,9 +35,8 @@
     <tr>
         <th scope="row">1</th>
         <td>${list.baTitle}</td>
-        <td>${list.baPassword}</td>
         <td>
-            <fmt:formatDate value="${list.baInsertDt}" pattern="yyyy.mm.dd"/>
+            <fmt:formatDate value="${list.baInsertDt}" pattern="yyyy.MM.dd"/>
         </td>
         <td>${list.baReadCount}</td>
     </tr>
