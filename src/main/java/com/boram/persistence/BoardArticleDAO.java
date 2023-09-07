@@ -9,4 +9,7 @@ public interface BoardArticleDAO {
 
     List<BoardArticleVO> selectBoardArticleList() throws Exception;
 
+    BoardArticleVO selectOneBoard(int id) throws Exception;
+
+    void updateReadCount(int id) throws Exception;
 }

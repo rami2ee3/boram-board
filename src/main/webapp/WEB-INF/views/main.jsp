@@ -31,21 +31,25 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="list" items="${boardList}">
+    <c:forEach var="board" items="${boardList}">
     <tr>
         <th scope="row">1</th>
-        <td>${list.baTitle}</td>
+        <td><a onclick="OnPageView('${board.baId}')" style="cursor: pointer">${board.baTitle}</a></td>
         <td>
-            <fmt:formatDate value="${list.baInsertDt}" pattern="yyyy.MM.dd"/>
+            <fmt:formatDate value="${board.baInsertDt}" pattern="yyyy.MM.dd"/>
         </td>
-        <td>${list.baReadCount}</td>
+        <td>${board.baReadCount}</td>
     </tr>
     </c:forEach>
     </tbody>
 </table>
-
 <div class="d-flex">
-    <button type="button" class="btn btn-success ms-auto">작성하기</button>
+    <button type="button" class="btn btn-success ms-auto" onclick="OnWritePage();">작성하기</button>
 </div>
+<form id="frmBoard" name="frmBoard" method="GET">
+    <input type="hidden" id="frmBoardBaId" name="baId" value="">
+    <input type="hidden" id="frmBoardCurrentPage" name="frmBoardCurrentPage" value="">
+</form>
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </body>
 </html>

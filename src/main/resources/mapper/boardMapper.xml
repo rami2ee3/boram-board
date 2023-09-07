@@ -3,27 +3,49 @@
 
 <mapper namespace="com.boram.mapper.boardArticleMapper">
 
-    <insert id="insertBoardArticle" parameterType="com.boram.domain.BoardArticleVO">
-        <selectKey keyProperty="seq_ba_id" resultType="int" order="BEFORE">
-            select seq_ba_id.nextval from dual;
-        </selectKey>
-        insert into board_article (ba_id, ba_title, ba_contents, ba_insert_dt, ba_read_count, ba_password)
-        values (
-                   #{seq_ba_id}
-                   #{baTitle},
-                   #{baContents},
-                   NOW(),
-                   0,
-                   #{baPassword}
-               );
-    </insert>
+
+    <!-- select -->
 
     <select id="selectBoardArticleList" resultType="com.boram.domain.BoardArticleVO">
-SELECT a.ba_id, a.ba_title, a.ba_contents, a.ba_insert_dt, a.ba_read_count,
-       a.ba_password
-  FROM board_article a
- WHERE 1 = 1
+        SELECT a.ba_id, a.ba_title, a.ba_contents, a.ba_insert_dt, a.ba_read_count,
+               a.ba_password
+        FROM board_article a
+        WHERE 1 = 1
+        ORDER BY a.ba_id DESC
     </select>
+
+    <select id="selectOneBoard" parameterType="int" resultType="com.boram.domain.BoardArticleVO">
+        select *
+          from board_article
+         where ba_id = #{ba_id}
+    </select>
+
+
+    <!-- insert -->
+
+    <insert id="insertBoardArticle" parameterType="com.boram.domain.BoardArticleVO">
+        <selectKey keyProperty="baId" resultType="int" order="BEFORE">
+            SELECT NEXTVAL('seq_ba_id') baId
+        </selectKey>
+            insert into board_article (ba_id, ba_title, ba_contents, ba_insert_dt, ba_read_count, ba_password)
+            values (
+                       #{baId},
+                       #{baTitle},
+                       #{baContents},
+                       NOW(),
+                       0,
+                       #{baPassword}
+                   )
+    </insert>
+
+
+    <!-- update -->
+    <update id="updateReadCount" parameterType="int">
+        UPDATE board_article SET ba_read_count = ba_read_count + 1
+         WHERE ba_id = #{ba_id}
+    </update>
+
+
 
 
 </mapper>

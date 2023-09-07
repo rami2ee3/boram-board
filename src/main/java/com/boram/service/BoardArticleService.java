@@ -8,4 +8,7 @@ public interface BoardArticleService {
     int insertBoardArticle(BoardArticleVO vo) throws Exception;
 
     List<BoardArticleVO> selectBoardArticleList() throws Exception;
+
+    BoardArticleVO selectOneBoard(int id) throws Exception;
+
 }

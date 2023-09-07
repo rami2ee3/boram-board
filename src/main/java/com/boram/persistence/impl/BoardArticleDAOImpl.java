@@ -26,4 +26,14 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
         return sqlSession.selectList(NAMESPACE + ".selectBoardArticleList");
     }
 
+    @Override
+    public BoardArticleVO selectOneBoard(int id) throws Exception {
+        return sqlSession.selectOne(NAMESPACE + ".selectOneBoard", id);
+    }
+
+    @Override
+    public void updateReadCount(int id) throws Exception {
+        sqlSession.update(NAMESPACE + ".updateReadCount", id);
+    }
+
 }

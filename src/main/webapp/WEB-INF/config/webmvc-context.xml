@@ -23,6 +23,6 @@
     </beans:bean>
 
     <!-- 정적 리소스 경로 설정 -->
-    <resources mapping="/**" location="/resources/"/>
+    <resources mapping="/resources/**" location="/resources/"/>
 
 </beans:beans>
