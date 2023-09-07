@@ -45,7 +45,7 @@
         </selectKey>
             insert into board_article (ba_id, ba_title, ba_contents, ba_insert_dt, ba_read_count, ba_password)
             values (
-
+                       #{baId},
                        #{baTitle},
                        #{baContents},
                        NOW(),

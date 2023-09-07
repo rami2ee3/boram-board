@@ -17,6 +17,7 @@ public class BoardController {
     @Autowired
     private BoardArticleService boardArticleService;
 
+    // 게시판 리스트 페이지 view
     @GetMapping("/")
     public String main(Model model) throws Exception {
         List<BoardArticleVO> boardArticleVOList = boardArticleService.selectBoardArticleList();
@@ -24,18 +25,29 @@ public class BoardController {
         return "main";
     }
 
-    @GetMapping("/detail")
-    public String detail(@RequestParam("baId") int baId, Model model) throws Exception {
+//    // 게시판 상세 페이지 view ( RequestParam "baId" 생략 가능 )
+//    @GetMapping("/detail")
+//    public String detail(@RequestParam("baId") int baId, Model model) throws Exception {
+//        BoardArticleVO detail = boardArticleService.selectOneBoard(baId);
+//        model.addAttribute("detail", detail);
+//        return "detail";
+//    }
+
+    // 게시판 상세 페이지 view ( PathVariable "baId" 생략 가능)
+    @GetMapping("/detail/{baId}")
+    public String detail(@PathVariable("baId") int baId, Model model) throws Exception {
         BoardArticleVO detail = boardArticleService.selectOneBoard(baId);
         model.addAttribute("detail", detail);
         return "detail";
     }
 
+    // 게시판 글쓰기 페이지 view
     @GetMapping("/write")
     public String write() {
         return "write";
     }
 
+    // 게시판 글쓰기 process
     @PostMapping("/write_proc")
     public String writeProc(BoardArticleVO boardArticleVO) throws Exception {
         System.out.println(boardArticleVO.toString());
@@ -43,11 +55,10 @@ public class BoardController {
         return "redirect:/";
     }
 
-    @DeleteMapping("/delete/{id}")
-    public @ResponseBody int deleteBoard(@PathVariable int id) throws Exception{
-        return boardArticleService.deleteBoard(id);
-    }
+    // 글 삭제
+    // POST로 글 번호, 비밀번호 같이 받아서 입력값 검증해서 삭제 시켜줘야함
 
+    // 글 수정
     @GetMapping("modify/{id}")
     public String updateBoard(@PathVariable int id, Model model) throws Exception{
         BoardArticleVO detail = boardArticleService.selectOneBoard(id);

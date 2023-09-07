@@ -33,8 +33,8 @@
     <tbody>
     <c:forEach var="board" items="${boardList}">
     <tr>
-        <th scope="row">1</th>
-        <td><a onclick="OnPageView('${board.baId}')" style="cursor: pointer">${board.baTitle}</a></td>
+        <th scope="row">${board.baId}</th>
+        <td><span onclick="OnPageView('${board.baId}')" style="cursor: pointer">${board.baTitle}</span></td>
         <td>
             <fmt:formatDate value="${board.baInsertDt}" pattern="yyyy.MM.dd"/>
         </td>

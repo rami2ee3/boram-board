@@ -1,10 +1,12 @@
 console.log('main.js');
 
 const OnPageView = (baId) => {
-    console.log(`baId: ${baId}`);
-
-    document.getElementById("frmBoardBaId").value = baId;
-    document.getElementById("frmBoard").action = "detail";
+    // RequestParam 으로 이동시킬 경우
+    // document.getElementById("frmBoardBaId").value = baId;
+    // document.getElementById("frmBoard").action = '/detail';
+    // document.getElementById("frmBoard").submit();
+    // PathVariable 로 이동시킬 경우
+    document.getElementById("frmBoard").action = `/detail/${baId}`;
     document.getElementById("frmBoard").submit();
 }
 
