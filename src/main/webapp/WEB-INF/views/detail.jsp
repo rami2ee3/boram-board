@@ -6,7 +6,6 @@
 <%@include file="./include/header.jsp" %>
 
 
-
 <body>
 
 <h5 class="card-title">${detail.baTitle}</h5>
@@ -32,10 +31,11 @@
     <input type="hidden" id="frmBoardBaId" name="baId" value="">
     <input type="hidden" id="frmBoardCurrentPage" name="frmBoardCurrentPage" value="">
 </form>
-<div  class="d-flex">
+<div class="d-flex">
     <button type="button" class="btn btn-outline-secondary ms-auto" onclick="OnMainPage();">목록으로</button>
     <button type="button" class="btn btn-outline-warning" onclick="OnModifyPage();">수정하기</button>
-    <button type="button" class="btn btn-outline-danger"onclick="DeleteConfirm();">삭제하기</button>
+    <button type="button" class="btn btn-outline-danger" onclick="DeleteConfirm();">삭제하기</button>
 </div>
 </body>
+<script src="/resources/js/detail.js"></script>
 </html>

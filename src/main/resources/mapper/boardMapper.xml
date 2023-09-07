@@ -56,7 +56,7 @@
 
     <insert id="insertComments" parameterType="com.boram.domain.BoardCommentsVO">
         <selectKey keyProperty="bcId" resultType="int" order="BEFORE">
-            SELECT NEXTVAL('seq_bc_id') baId
+            SELECT NEXTVAL('seq_bc_id') bcId
         </selectKey>
         insert into board_comments (bc_id, ba_id, bc_contents, bc_password)
         values (
@@ -65,9 +65,7 @@
                    #{bcComments},
                    #{bcPassword}
                );
-        <selectKey keyProperty="id" order="AFTER" resultType="int">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+
     </insert>
 
     <!-- update -->
