@@ -1,6 +1,7 @@
 package com.boram.service.impl;
 
 import com.boram.domain.BoardArticleVO;
+import com.boram.domain.BoardCommentsVO;
 import com.boram.persistence.BoardArticleDAO;
 import com.boram.service.BoardArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +49,33 @@ public class BoardArticleServiceImpl implements BoardArticleService {
         return boardArticleDAO.selectOneBoard(id);
     }
 
+    @Override
+    public int deleteBoard(int id) {
+        int result = 1;
+        int boardResult = boardArticleDAO.deleteBoard(id);
+        if(boardResult == 0){
+            result = boardResult;
+        }
+        return result;
+    }
+
+    @Override
+    public int updateBoard(BoardArticleVO vo) throws Exception {
+        return boardArticleDAO.updateBoard(vo);
+    }
+
     public void updateReadCount(int id) throws Exception {
         boardArticleDAO.updateReadCount(id);
+    }
+
+    @Override
+    public int insertComments(BoardCommentsVO vo) throws Exception {
+        return boardArticleDAO.insertComments(vo);
+    }
+
+    @Override
+    public BoardCommentsVO selectComments(int commentsId) throws Exception {
+        return boardArticleDAO.selectComments(commentsId);
     }
 
 }

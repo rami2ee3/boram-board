@@ -1,6 +1,7 @@
 package com.boram.persistence;
 
 import com.boram.domain.BoardArticleVO;
+import com.boram.domain.BoardCommentsVO;
 
 import java.util.List;
 
@@ -12,4 +13,13 @@ public interface BoardArticleDAO {
     BoardArticleVO selectOneBoard(int id) throws Exception;
 
     void updateReadCount(int id) throws Exception;
+
+    int deleteBoard(int id);
+
+    int updateBoard(BoardArticleVO vo) throws Exception;
+
+    //댓글
+    int insertComments(BoardCommentsVO vo) throws Exception;
+
+    BoardCommentsVO selectComments(int commentsId) throws Exception;
 }

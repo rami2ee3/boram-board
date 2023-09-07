@@ -1,6 +1,7 @@
 package com.boram.persistence.impl;
 
 import com.boram.domain.BoardArticleVO;
+import com.boram.domain.BoardCommentsVO;
 import com.boram.persistence.BoardArticleDAO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,26 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
     @Override
     public void updateReadCount(int id) throws Exception {
         sqlSession.update(NAMESPACE + ".updateReadCount", id);
+    }
+
+    @Override
+    public int deleteBoard(int id) {
+        return sqlSession.delete(NAMESPACE + ".deleteBoard", id);
+    }
+
+    @Override
+    public int updateBoard(BoardArticleVO vo) throws Exception {
+        return sqlSession.update(NAMESPACE + ".updateBoard", vo);
+    }
+
+    @Override
+    public int insertComments(BoardCommentsVO vo) throws Exception {
+        return sqlSession.insert(NAMESPACE + ".insertComments");
+    }
+
+    @Override
+    public BoardCommentsVO selectComments(int commentsId) throws Exception {
+        return sqlSession.selectOne(NAMESPACE + ".selectComments", commentsId);
     }
 
 }

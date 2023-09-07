@@ -30,3 +30,8 @@ const checkForm = () => {
 
     return true;
 }
+
+
+const OnMainPage = () => {
+    document.getElementById("frmBoard").action = "/";
+}

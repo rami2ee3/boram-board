@@ -3,9 +3,7 @@
 
 <mapper namespace="com.boram.mapper.boardArticleMapper">
 
-
     <!-- select -->
-
     <select id="selectBoardArticleList" resultType="com.boram.domain.BoardArticleVO">
         SELECT a.ba_id, a.ba_title, a.ba_contents, a.ba_insert_dt, a.ba_read_count,
                a.ba_password
@@ -20,16 +18,34 @@
          where ba_id = #{ba_id}
     </select>
 
+    <select id="selectCommentsList" resultType="com.boram.domain.BoardCommentsVO" parameterType="int">
+        SELECT *
+        FROM board_comments
+        WHERE 1 = 1
+          AND ba_id = #{ba_id}
+        ORDER BY bc_id DESC
+    </select>
+
+    <select id="selectComments" parameterType="int" resultType="com.boram.domain.BoardCommentsVO">
+        select *
+        from board_comments
+        where bc_id = #{bc_id}
+    </select>
+
+    <select id="countReply" parameterType="int" resultType="int">
+        SELECT COUNT(*) AS count
+          FROM board_comments
+         WHERE ba_id = #{ba_id}
+    </select>
 
     <!-- insert -->
-
     <insert id="insertBoardArticle" parameterType="com.boram.domain.BoardArticleVO">
         <selectKey keyProperty="baId" resultType="int" order="BEFORE">
             SELECT NEXTVAL('seq_ba_id') baId
         </selectKey>
             insert into board_article (ba_id, ba_title, ba_contents, ba_insert_dt, ba_read_count, ba_password)
             values (
-                       #{baId},
+
                        #{baTitle},
                        #{baContents},
                        NOW(),
@@ -38,6 +54,21 @@
                    )
     </insert>
 
+    <insert id="insertComments" parameterType="com.boram.domain.BoardCommentsVO">
+        <selectKey keyProperty="bcId" resultType="int" order="BEFORE">
+            SELECT NEXTVAL('seq_bc_id') baId
+        </selectKey>
+        insert into board_comments (bc_id, ba_id, bc_contents, bc_password)
+        values (
+                   NEXTVAL('seq_bc_id'),
+                   #{baId},
+                   #{bcComments},
+                   #{bcPassword}
+               );
+        <selectKey keyProperty="id" order="AFTER" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
 
     <!-- update -->
     <update id="updateReadCount" parameterType="int">
@@ -45,7 +76,30 @@
          WHERE ba_id = #{ba_id}
     </update>
 
+    <update id="updateBoard" parameterType="com.boram.domain.BoardArticleVO">
+        update board_article
+        set ba_title = #{baTitle},
+            ba_contents = #{baContents}
+        where ba_id = #{baId};
+    </update>
 
+    <update id="updateComments" parameterType="com.boram.domain.BoardCommentsVO">
+        update board_article
+        set bc_contents = #{bcContents}
+        where bc_id = #{bcId};
+    </update>
 
+    <!-- delete -->
+    <delete id="deleteBoard" parameterType="int">
+        delete
+        from board_article
+        where ba_id = #{ba_id};
+    </delete>
+
+    <delete id="deleteComments" parameterType="int">
+        delete
+        from board_comments
+        where bc_id = #{bc_id};
+    </delete>
 
 </mapper>
