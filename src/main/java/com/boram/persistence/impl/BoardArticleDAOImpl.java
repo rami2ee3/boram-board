@@ -43,8 +43,8 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
     }
 
     @Override
-    public int updateBoard(BoardArticleVO vo) throws Exception {
-        return sqlSession.update(NAMESPACE + ".updateBoard", vo);
+    public int modifyBoard(BoardArticleVO vo) throws Exception {
+        return sqlSession.update(NAMESPACE + ".modifyBoard", vo);
     }
 
     @Override
@@ -56,5 +56,12 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
     public BoardCommentsVO selectComments(int commentsId) throws Exception {
         return sqlSession.selectOne(NAMESPACE + ".selectComments", commentsId);
     }
+
+    @Override
+    public List<BoardCommentsVO> selectCommentsList(int baId) throws Exception {
+        return sqlSession.selectList(NAMESPACE + ".selectCommentsList", baId);
+    }
+
+
 
 }

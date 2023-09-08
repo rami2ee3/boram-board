@@ -14,9 +14,12 @@ public interface BoardArticleService {
 
     int deleteBoard(int id);
 
-    int updateBoard(BoardArticleVO vo) throws Exception;
+    int modifyBoard(BoardArticleVO vo) throws Exception;
 
     int insertComments(BoardCommentsVO vo) throws Exception;
 
     BoardCommentsVO selectComments(int commentsId) throws Exception;
+
+    List<BoardCommentsVO> selectCommentsList(int baId) throws Exception;
+
 }

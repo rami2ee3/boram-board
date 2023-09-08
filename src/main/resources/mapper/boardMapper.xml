@@ -38,6 +38,12 @@
          WHERE ba_id = #{ba_id}
     </select>
 
+    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT count(*)
+          FROM board_article
+    </select>
+
+
     <!-- insert -->
     <insert id="insertBoardArticle" parameterType="com.boram.domain.BoardArticleVO">
         <selectKey keyProperty="baId" resultType="int" order="BEFORE">
@@ -60,7 +66,7 @@
         </selectKey>
         insert into board_comments (bc_id, ba_id, bc_contents, bc_password)
         values (
-                   NEXTVAL('seq_bc_id'),
+                   #{bcId},
                    #{baId},
                    #{bcComments},
                    #{bcPassword}
@@ -74,7 +80,7 @@
          WHERE ba_id = #{ba_id}
     </update>
 
-    <update id="updateBoard" parameterType="com.boram.domain.BoardArticleVO">
+    <update id="modifyBoard" parameterType="com.boram.domain.BoardArticleVO">
         update board_article
         set ba_title = #{baTitle},
             ba_contents = #{baContents}

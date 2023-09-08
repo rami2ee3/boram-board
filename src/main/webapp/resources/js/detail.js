@@ -8,10 +8,19 @@ const OnMainPage = () => {
     form.submit();
 }
 
-const OnModifyPage = () => {
-    document.getElementById("frmBoard").action = "modify";
+const OnModifyPage = (baId) => {
+    document.getElementById("frmBoard").action = `/modify/${baId}`;
+    prompt('비밀 번호를 입력해 주세요','글 작성시 입력한 비밀 번호');
+
+    document.getElementById("frmBoard").submit();
 }
 
-const DeleteConfirm = () => {
+const DeleteConfirm = (baId) => {
+    // TODO : 삭제 구현
+
+}
+
+
+const WriteComments = async () => {
 
 }

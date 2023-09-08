@@ -34,7 +34,7 @@
         </div>
         <div class="d-flex">
             <button type="submit" class="btn btn-success ms-auto">작성 완료</button>
-            <button type="button" class="btn btn-outline-secondary" onclick="OnMainPage();">작성취소</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="OnMainPage()">작성취소</button>
         </div>
     </form>
 </div>

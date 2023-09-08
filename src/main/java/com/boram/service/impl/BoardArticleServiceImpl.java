@@ -60,8 +60,8 @@ public class BoardArticleServiceImpl implements BoardArticleService {
     }
 
     @Override
-    public int updateBoard(BoardArticleVO vo) throws Exception {
-        return boardArticleDAO.updateBoard(vo);
+    public int modifyBoard(BoardArticleVO vo) throws Exception {
+        return boardArticleDAO.modifyBoard(vo);
     }
 
     public void updateReadCount(int id) throws Exception {
@@ -77,5 +77,11 @@ public class BoardArticleServiceImpl implements BoardArticleService {
     public BoardCommentsVO selectComments(int commentsId) throws Exception {
         return boardArticleDAO.selectComments(commentsId);
     }
+
+    @Override
+    public List<BoardCommentsVO> selectCommentsList(int baId) throws Exception {
+        return boardArticleDAO.selectCommentsList(baId);
+    }
+
 
 }
