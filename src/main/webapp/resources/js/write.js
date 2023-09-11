@@ -1,17 +1,6 @@
 const checkForm = () => {
-    const baTitle = document.getElementById("ba_title");
-    if(baTitle.value === '') {
-        alert('제목을 입력해 주세요.');
-        baTitle.focus();
-        return false;
-    }
-
-    const baContents = document.getElementById("ba_contents");
-    if(baContents.value === ''){
-        alert('내용을 입력해 주세요');
-        baContents.focus();
-        return false;
-    }
+    const formCheck = boardFormCheck();
+    if(!formCheck) return;
 
     const baPassword = document.getElementById("ba_password");
     if(baPassword.value === ''){
@@ -34,4 +23,5 @@ const checkForm = () => {
 
 const OnMainPage = () => {
     document.getElementById("frmBoard").action = "/";
+    document.getElementById("frmBoard").submit();
 }

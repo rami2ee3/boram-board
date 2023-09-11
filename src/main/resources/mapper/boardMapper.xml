@@ -4,37 +4,18 @@
 <mapper namespace="com.boram.mapper.boardArticleMapper">
 
     <!-- select -->
-    <select id="selectBoardArticleList" resultType="com.boram.domain.BoardArticleVO">
+    <select id="selectBoardArticleList" resultType="com.boram.domain.entity.BoardArticleEntity">
         SELECT a.ba_id, a.ba_title, a.ba_contents, a.ba_insert_dt, a.ba_read_count,
                a.ba_password
-        FROM board_article a
-        WHERE 1 = 1
-        ORDER BY a.ba_id DESC
+          FROM board_article a
+         WHERE 1 = 1
+         ORDER BY a.ba_id DESC
     </select>
 
-    <select id="selectOneBoard" parameterType="int" resultType="com.boram.domain.BoardArticleVO">
-        select *
-          from board_article
-         where ba_id = #{ba_id}
-    </select>
-
-    <select id="selectCommentsList" resultType="com.boram.domain.BoardCommentsVO" parameterType="int">
+    <select id="selectOneBoard" parameterType="int" resultType="com.boram.domain.entity.BoardArticleEntity">
         SELECT *
-        FROM board_comments
-        WHERE 1 = 1
-          AND ba_id = #{ba_id}
-        ORDER BY bc_id DESC
-    </select>
-
-    <select id="selectComments" parameterType="int" resultType="com.boram.domain.BoardCommentsVO">
-        select bc_id,
-               ba_id,
-               bc_contents,
-               bc_password,
-               to_char(bc_insert_dt, 'YYYY-MM-DD') as bc_insert_dt,
-               to_char(bc_modify_dt, 'YYYY-MM-DD') as bc_modify_dt
-        from board_comments
-        where bc_id = #{bc_id}
+          FROM board_article
+         WHERE ba_id = #{ba_id}
     </select>
 
     <select id="countReply" parameterType="int" resultType="int">
@@ -43,19 +24,13 @@
          WHERE ba_id = #{ba_id}
     </select>
 
-    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
-        SELECT count(*)
-          FROM board_article
-    </select>
-
-
     <!-- insert -->
-    <insert id="insertBoardArticle" parameterType="com.boram.domain.BoardArticleVO">
+    <insert id="insertBoardArticle" parameterType="com.boram.domain.entity.BoardArticleEntity">
         <selectKey keyProperty="baId" resultType="int" order="BEFORE">
             SELECT NEXTVAL('seq_ba_id') baId
         </selectKey>
-            insert into board_article (ba_id, ba_title, ba_contents, ba_insert_dt, ba_read_count, ba_password)
-            values (
+            INSERT INTO board_article (ba_id, ba_title, ba_contents, ba_insert_dt, ba_read_count, ba_password)
+            VALUES (
                        #{baId},
                        #{baTitle},
                        #{baContents},
@@ -65,49 +40,25 @@
                    )
     </insert>
 
-    <insert id="insertComments" parameterType="com.boram.domain.BoardCommentsVO">
-        <selectKey keyProperty="bcId" resultType="int" order="BEFORE">
-            SELECT NEXTVAL('seq_bc_id') bcId
-        </selectKey>
-        insert into board_comments (bc_id, ba_id, bc_contents, bc_password)
-        values (
-                   #{bcId},
-                   #{baId},
-                   #{bcContents},
-                   #{bcPassword}
-               );
-    </insert>
-
     <!-- update -->
     <update id="updateReadCount" parameterType="int">
-        UPDATE board_article SET ba_read_count = ba_read_count + 1
+        UPDATE board_article
+           SET ba_read_count = ba_read_count + 1
          WHERE ba_id = #{ba_id}
     </update>
 
-    <update id="modifyBoard" parameterType="com.boram.domain.BoardArticleVO">
-        update board_article
-        set ba_title = #{baTitle},
-            ba_contents = #{baContents}
-        where ba_id = #{baId};
-    </update>
-
-    <update id="updateComments" parameterType="com.boram.domain.BoardCommentsVO">
-        update board_article
-        set bc_contents = #{bcContents}
-        where bc_id = #{bcId};
+    <update id="updateBoard" parameterType="com.boram.domain.entity.BoardArticleEntity">
+        UPDATE board_article
+           SET ba_title = #{baTitle},
+               ba_contents = #{baContents}
+         WHERE ba_id = #{baId}
     </update>
 
     <!-- delete -->
     <delete id="deleteBoard" parameterType="int">
-        delete
-        from board_article
-        where ba_id = #{ba_id};
-    </delete>
-
-    <delete id="deleteComments" parameterType="int">
-        delete
-        from board_comments
-        where bc_id = #{bc_id};
+        DELETE
+          FROM board_article
+         WHERE ba_id = #{ba_id}
     </delete>
 
 </mapper>

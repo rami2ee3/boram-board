@@ -1,7 +1,6 @@
 package com.boram.persistence.impl;
 
-import com.boram.domain.BoardArticleVO;
-import com.boram.domain.BoardCommentsVO;
+import com.boram.domain.entity.BoardArticleEntity;
 import com.boram.persistence.BoardArticleDAO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +17,17 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
     private static final String NAMESPACE = "com.boram.mapper.boardArticleMapper";
 
     @Override
-    public int insertBoardArticle(BoardArticleVO vo) throws Exception {
-        return sqlSession.insert(NAMESPACE + ".insertBoardArticle", vo);
+    public int insertBoardArticle(BoardArticleEntity boardArticleEntity) throws Exception {
+        return sqlSession.insert(NAMESPACE + ".insertBoardArticle", boardArticleEntity);
     }
 
     @Override
-    public List<BoardArticleVO> selectBoardArticleList() throws Exception {
+    public List<BoardArticleEntity> selectBoardArticleList() throws Exception {
         return sqlSession.selectList(NAMESPACE + ".selectBoardArticleList");
     }
 
     @Override
-    public BoardArticleVO selectOneBoard(int id) throws Exception {
+    public BoardArticleEntity selectOneBoard(int id) throws Exception {
         return sqlSession.selectOne(NAMESPACE + ".selectOneBoard", id);
     }
 
@@ -38,31 +37,12 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
     }
 
     @Override
-    public int deleteBoard(int id) {
+    public int deleteBoard(int id) throws Exception {
         return sqlSession.delete(NAMESPACE + ".deleteBoard", id);
     }
 
     @Override
-    public int modifyBoard(BoardArticleVO vo) throws Exception {
-        return sqlSession.update(NAMESPACE + ".modifyBoard", vo);
+    public int updateBoard(BoardArticleEntity vo) throws Exception {
+        return sqlSession.update(NAMESPACE + ".updateBoard", vo);
     }
-
-    @Override
-    public int insertComments(BoardCommentsVO vo) throws Exception {
-        sqlSession.insert(NAMESPACE + ".insertComments", vo);
-        return vo.getBcId();
-    }
-
-    @Override
-    public BoardCommentsVO selectComments(int commentsId) throws Exception {
-        return sqlSession.selectOne(NAMESPACE + ".selectComments", commentsId);
-    }
-
-    @Override
-    public List<BoardCommentsVO> selectCommentsList(int baId) throws Exception {
-        return sqlSession.selectList(NAMESPACE + ".selectCommentsList", baId);
-    }
-
-
-
 }

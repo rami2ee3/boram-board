@@ -10,9 +10,8 @@
 <body>
 <select class="form-select form-select-sm w-25" aria-label="Small select example">
     <option selected>정렬 조건</option>
-    <option value="1">작성자</option>
-    <option value="2">글 내용</option>
-    <option value="3">작성일</option>
+    <option value="1">제목</option>
+    <option value="2">내용</option>
 </select>
 <div class="d-flex gap-3">
     <div class="col-sm-4">
@@ -21,6 +20,12 @@
     </div>
     <button type="button" class="btn btn-outline-info mt-auto">검색</button>
 </div>
+<label for="exampleInputPassword1" class="form-label">
+<c:choose>
+    <c:when test="${result > 0}">처리되었습니다.</c:when>
+    <c:otherwise> 오류 발생!!!!</c:otherwise>
+</c:choose>
+</label>
 <table class="table table-hover mt-3">
     <thead>
     <tr>
@@ -48,7 +53,9 @@
 </div>
 <form id="frmBoard" name="frmBoard" method="GET">
     <input type="hidden" id="frmBoardBaId" name="baId" value="">
-    <input type="hidden" id="frmBoardCurrentPage" name="frmBoardCurrentPage" value="">
+    <input type="hidden" id="frmBoardCurrentPageNo" name="currentPageNo" value="1">
+    <input type="hidden" id="frmBoardSearchType" name="searchType" value="">
+    <input type="hidden" id="frmBoardSearchKeyword" name="searchKeyword" value="">
 </form>
 <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </body>

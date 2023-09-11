@@ -1,4 +1,4 @@
-package com.boram.domain;
+package com.boram.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ import java.util.Date;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardArticleVO {
+public class BoardArticleEntity {
     private int baId;
     private String baTitle;
     private String baContents;

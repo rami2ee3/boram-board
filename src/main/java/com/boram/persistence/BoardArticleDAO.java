@@ -1,29 +1,22 @@
 package com.boram.persistence;
 
-import com.boram.domain.BoardArticleVO;
-import com.boram.domain.BoardCommentsVO;
+import com.boram.domain.entity.BoardArticleEntity;
 
 import java.util.List;
 
 public interface BoardArticleDAO {
-    int insertBoardArticle(BoardArticleVO vo) throws Exception;
+    int insertBoardArticle(BoardArticleEntity boardArticleEntity) throws Exception;
 
-    List<BoardArticleVO> selectBoardArticleList() throws Exception;
+    List<BoardArticleEntity> selectBoardArticleList() throws Exception;
 
-    BoardArticleVO selectOneBoard(int id) throws Exception;
+    BoardArticleEntity selectOneBoard(int id) throws Exception;
 
     void updateReadCount(int id) throws Exception;
 
-    int deleteBoard(int id);
+    int deleteBoard(int id) throws Exception;
 
-    int modifyBoard(BoardArticleVO vo) throws Exception;
+    int updateBoard(BoardArticleEntity boardArticleEntity) throws Exception;
 
     //댓글
-    int insertComments(BoardCommentsVO vo) throws Exception;
-
-    BoardCommentsVO selectComments(int commentsId) throws Exception;
-
-    List<BoardCommentsVO> selectCommentsList(int baId) throws Exception;
-
 
 }

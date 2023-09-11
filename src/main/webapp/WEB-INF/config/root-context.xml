@@ -6,19 +6,19 @@
 
     <!-- dataSource 설정, spring-jdbc 모듈 사용, spring 에서 jdbc 를 통해 mysql 에 접속할 수 있게 함 -->
     <!-- office -->
-<!--    <bean id="postgresDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-<!--        <property name="driverClassName" value="org.postgresql.Driver"></property>-->
-<!--        <property name="url" value="jdbc:postgresql://125.133.91.46:15432/boram_board?useUnicode=true&amp;characterEncoding=utf8"></property>-->
-<!--        <property name="username" value="boram"></property>-->
-<!--        <property name="password" value="boram!@#$"></property>-->
-<!--    </bean>-->
-    <!-- local -->
     <bean id="postgresDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"></property>
-        <property name="url" value="jdbc:postgresql://localhost:5432/boram_board?useUnicode=true&amp;characterEncoding=utf8"></property>
-        <property name="username" value="postgres"></property>
+        <property name="url" value="jdbc:postgresql://125.133.91.46:15432/boram_board?useUnicode=true&amp;characterEncoding=utf8"></property>
+        <property name="username" value="boram"></property>
         <property name="password" value="boram!@#$"></property>
     </bean>
+    <!-- local -->
+<!--    <bean id="postgresDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+<!--        <property name="driverClassName" value="org.postgresql.Driver"></property>-->
+<!--        <property name="url" value="jdbc:postgresql://localhost:5432/boram_board?useUnicode=true&amp;characterEncoding=utf8"></property>-->
+<!--        <property name="username" value="postgres"></property>-->
+<!--        <property name="password" value="boram!@#$"></property>-->
+<!--    </bean>-->
 
     <!-- mybatis SqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

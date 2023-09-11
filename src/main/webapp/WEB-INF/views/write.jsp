@@ -12,18 +12,11 @@
             <input type="text" name="baTitle" id="ba_title" class="form-control" placeholder="글 제목을 입력하세요" aria-label="title"
                    aria-describedby="basic-addon1">
         </div>
-
         <div class="form-floating">
           <textarea name="baContents" id="ba_contents" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
                     style="height: 100px"></textarea>
             <label for="floatingTextarea2">글 내용</label>
         </div>
-
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile">
-            <label class="custom-file-label" for="customFile"></label>
-        </div>
-
         <div class="form-floating w-25">
             <input type="password" name="baPassword" id="ba_password" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
@@ -34,11 +27,12 @@
         </div>
         <div class="d-flex">
             <button type="submit" class="btn btn-success ms-auto">작성 완료</button>
-            <button type="button" class="btn btn-outline-secondary" onclick="OnMainPage()">작성취소</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="OnMainPage();">작성취소</button>
         </div>
     </form>
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/write.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/form_check.js"></script>
 </body>
 
 </html>
