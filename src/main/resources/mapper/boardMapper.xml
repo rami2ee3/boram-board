@@ -27,7 +27,12 @@
     </select>
 
     <select id="selectComments" parameterType="int" resultType="com.boram.domain.BoardCommentsVO">
-        select *
+        select bc_id,
+               ba_id,
+               bc_contents,
+               bc_password,
+               to_char(bc_insert_dt, 'YYYY-MM-DD') as bc_insert_dt,
+               to_char(bc_modify_dt, 'YYYY-MM-DD') as bc_modify_dt
         from board_comments
         where bc_id = #{bc_id}
     </select>
@@ -68,10 +73,9 @@
         values (
                    #{bcId},
                    #{baId},
-                   #{bcComments},
+                   #{bcContents},
                    #{bcPassword}
                );
-
     </insert>
 
     <!-- update -->

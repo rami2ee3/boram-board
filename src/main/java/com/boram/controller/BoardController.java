@@ -40,14 +40,7 @@ public class BoardController {
         try {
             BoardArticleVO detail = boardArticleService.selectOneBoard(baId);
             model.addAttribute("detail", detail);
-            System.out.println("---------------글 상세 조회 시작----------------");
-            System.out.println(detail);
-            System.out.println("---------------글 상세 조회 종료----------------");
-
             List<BoardCommentsVO> commentsList = boardArticleService.selectCommentsList(baId);
-            System.out.println("---------------댓글 상세 조회 시작----------------");
-            System.out.println(commentsList);
-            System.out.println("---------------댓글 상세 조회 종료----------------");
             model.addAttribute("commentsList", commentsList);
         } catch (Exception e){
             e.printStackTrace();
@@ -89,12 +82,16 @@ public class BoardController {
         return 0;
     }
 
-    // 댓글
+    // 댓글 작성
     @PostMapping("comments")
     public @ResponseBody BoardCommentsVO insertComments(BoardCommentsVO vo) throws Exception{
         BoardCommentsVO comments = null;
         try {
-            boardArticleService.insertComments(vo);
+            // 1. 댓글 등록 후 댓글 번호 리턴받는다.
+            int bcId = boardArticleService.insertComments(vo);
+            // 2. 댓글 id로 실제 댓글 정보 DB에서 입력된거 조회
+            comments = boardArticleService.selectComments(bcId);
+            System.out.println(comments);
         } catch (Exception e){
             e.printStackTrace();
         }

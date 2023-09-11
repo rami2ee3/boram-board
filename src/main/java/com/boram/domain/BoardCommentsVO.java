@@ -15,5 +15,6 @@ public class BoardCommentsVO {
     private int baId;
     private String bcContents;
     private String bcPassword;
-    private Date bcInsertDt;
+    private String bcInsertDt;
+    private String bcModifyDt;
 }

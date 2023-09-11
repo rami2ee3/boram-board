@@ -49,7 +49,8 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
 
     @Override
     public int insertComments(BoardCommentsVO vo) throws Exception {
-        return sqlSession.insert(NAMESPACE + ".insertComments");
+        sqlSession.insert(NAMESPACE + ".insertComments", vo);
+        return vo.getBcId();
     }
 
     @Override
