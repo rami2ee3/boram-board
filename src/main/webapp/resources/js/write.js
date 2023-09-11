@@ -1,9 +1,9 @@
-const checkForm = () => {
+const OnWriteProc = () => {
     const formCheck = boardFormCheck();
-    if(!formCheck) return;
+    if (!formCheck) return false;
 
     const baPassword = document.getElementById("ba_password");
-    if(baPassword.value === ''){
+    if (baPassword.value === '') {
         alert('비밀 번호를 입력해 주세요');
         baPassword.focus();
         return false;
@@ -11,7 +11,7 @@ const checkForm = () => {
 
     const baPasswordConfirm = document.getElementById("ba_password_confirm");
 
-    if(baPassword.value !== baPasswordConfirm.value) {
+    if (baPassword.value !== baPasswordConfirm.value) {
         alert('비밀 번호를 확인해 주세요.')
         baPasswordConfirm.focus();
         return false;
@@ -23,5 +23,6 @@ const checkForm = () => {
 
 const OnMainPage = () => {
     document.getElementById("frmBoard").action = "/";
+    document.getElementById("frmBoard").method = "get";
     document.getElementById("frmBoard").submit();
 }

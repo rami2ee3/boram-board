@@ -11,8 +11,9 @@ public interface BoardArticleService {
 
     BoardArticleEntity selectOneBoard(int id) throws Exception;
 
-    int deleteBoard(int id) throws Exception;
+    int deleteBoard(BoardArticleEntity boardArticleEntity) throws Exception;
 
     int updateBoard(BoardArticleEntity boardArticleEntity) throws Exception;
+
 
 }

@@ -46,13 +46,18 @@ public class BoardArticleServiceImpl implements BoardArticleService {
     }
 
     @Override
-    public int deleteBoard(int id) throws Exception {
-        int result = 1;
-        int boardResult = boardArticleDAO.deleteBoard(id);
-        if(boardResult == 0){
-            result = boardResult;
+    public int deleteBoard(BoardArticleEntity boardArticleEntity) throws Exception {
+        BoardArticleEntity originalBoardArticleEntity = boardArticleDAO.selectOneBoard(boardArticleEntity.getBaId());
+        boolean passwordMatch = bCryptPasswordEncoder.matches(
+                boardArticleEntity.getBaPassword(),
+                originalBoardArticleEntity.getBaPassword());
+
+        if (passwordMatch) {
+            return boardArticleDAO.deleteBoard(boardArticleEntity.getBaId());
+        } else {
+            return 0;
         }
-        return result;
+
     }
 
     @Override
@@ -63,7 +68,7 @@ public class BoardArticleServiceImpl implements BoardArticleService {
                 boardArticleEntity.getBaPassword(),
                 originalBoardArticleEntity.getBaPassword());
 
-        if(passwordMatch) {
+        if (passwordMatch) {
             return boardArticleDAO.updateBoard(boardArticleEntity);
 
         } else {

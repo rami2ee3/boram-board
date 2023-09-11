@@ -64,11 +64,21 @@ public class BoardController {
         request.setAttribute("boardArticleVo", vo);
         int result = boardArticleService.updateBoard(entity);
         System.out.println("Modify Result: " + result);
+        redirectAttributes.addFlashAttribute("procName", "modifyProc");
         redirectAttributes.addFlashAttribute("result", result);
         return "redirect:/";
     }
 
-    // 글 삭제
+    // 글 삭제 process
+    @PostMapping("delete_proc")
+    public String deleteProc(BoardArticleVo vo, BoardArticleEntity entity, RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception{
+        request.setAttribute("boardArticleVo", vo);
+        int result = boardArticleService.deleteBoard(entity);
+        System.out.println("Delete Result: " + result);
+        redirectAttributes.addFlashAttribute("procName", "deleteProc");
+        redirectAttributes.addFlashAttribute("result", result);
+        return "redirect:/";
+    }
 
 
     // 댓글

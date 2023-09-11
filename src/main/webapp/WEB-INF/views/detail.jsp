@@ -60,7 +60,7 @@
     <button type="button" class="btn btn-outline-info" onclick="">다음</button>
     <button type="button" class="btn btn-outline-secondary" onclick="OnMainPage();">목록으로</button>
     <button type="button" class="btn btn-outline-warning" onclick="OnModifyPage();">수정하기</button>
-    <button type="button" class="btn btn-outline-danger" onclick="DeleteConfirm(${boardArticleEntity.baId});">삭제하기</button>
+    <button type="button" class="btn btn-outline-danger" onclick="DeleteConfirm();">삭제하기</button>
 </div>
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/detail.js"></script>

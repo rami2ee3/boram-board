@@ -1,4 +1,9 @@
+/**
+ * 게시글 입력값 검증하는 함수
+ * @returns {boolean}
+ */
 const boardFormCheck = () => {
+
     const baTitle = document.getElementById("ba_title");
     if(baTitle.value === '') {
         alert('제목을 입력해 주세요.');

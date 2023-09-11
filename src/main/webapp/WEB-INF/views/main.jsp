@@ -21,10 +21,19 @@
     <button type="button" class="btn btn-outline-info mt-auto">검색</button>
 </div>
 <label for="exampleInputPassword1" class="form-label">
-<c:choose>
-    <c:when test="${result > 0}">처리되었습니다.</c:when>
-    <c:otherwise> 오류 발생!!!!</c:otherwise>
-</c:choose>
+<!-- proc 결과 -->
+<c:if test="${procName eq 'modifyProc'}">
+    <c:choose>
+        <c:when test="${result > 0}">수정 완료되었습니다.</c:when>
+        <c:otherwise>오류 발생!!!!</c:otherwise>
+    </c:choose>
+</c:if>
+<c:if test="${procName eq 'deleteProc'}">
+    <c:choose>
+        <c:when test="${result > 0}">삭제 처리 되었습니다.</c:when>
+        <c:otherwise>오류 발생!!!!</c:otherwise>
+    </c:choose>
+</c:if>
 </label>
 <table class="table table-hover mt-3">
     <thead>
