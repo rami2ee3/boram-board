@@ -1,13 +1,14 @@
 package com.boram.persistence;
 
 import com.boram.domain.entity.BoardArticleEntity;
+import com.boram.domain.vo.BoardArticleVo;
 
 import java.util.List;
 
 public interface BoardArticleDAO {
     int insertBoardArticle(BoardArticleEntity boardArticleEntity) throws Exception;
 
-    List<BoardArticleEntity> selectBoardArticleList() throws Exception;
+    List<BoardArticleEntity> selectBoardArticleList(BoardArticleVo boardArticleVo) throws Exception;
 
     BoardArticleEntity selectOneBoard(int id) throws Exception;
 

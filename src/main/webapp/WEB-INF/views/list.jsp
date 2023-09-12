@@ -8,19 +8,20 @@
 
 
 <body>
-<select class="form-select form-select-sm w-25" aria-label="Small select example">
-    <option selected>정렬 조건</option>
-    <option value="1">제목</option>
-    <option value="2">내용</option>
-</select>
-<div class="d-flex gap-3">
-    <div class="col-sm-4">
-        <label for="exampleInputPassword1" class="form-label"></label>
-        <input type="text" class="form-control" id="exampleInputPassword1">
+<form id="frmBoardSearch" name="frmBoardSearch" method="get" action="">
+    <select id="selectSearchType" name="searchType" class="form-select form-select-sm w-25" aria-label="Small select example">
+        <option value="">검색 조건</option>
+        <option value="TITLE" <c:if test="${boardArticleVo.searchType eq 'TITLE'}">selected</c:if>>제목</option>
+        <option value="CONTENTS" <c:if test="${boardArticleVo.searchType eq 'CONTENTS'}">selected</c:if>>내용</option>
+    </select>
+    <div class="d-flex gap-3">
+        <div class="col-sm-4">
+            <label for="textSearchKeyword" class="form-label"></label>
+            <input type="text" id="textSearchKeyword" name="searchKeyword" class="form-control" value="${boardArticleVo.searchKeyword}">
+        </div>
+        <button type="button" id="btnSearch" class="btn btn-outline-info mt-auto">검색</button>
     </div>
-    <button type="button" class="btn btn-outline-info mt-auto">검색</button>
-</div>
-<label for="exampleInputPassword1" class="form-label">
+</form>
 
 <!-- proc 결과 -->
 <c:if test="${procName eq 'modifyProc'}">
@@ -68,6 +69,6 @@
     <input type="hidden" id="frmBoardSearchType" name="searchType" value="">
     <input type="hidden" id="frmBoardSearchKeyword" name="searchKeyword" value="">
 </form>
-<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/list.js"></script>
 </body>
 </html>

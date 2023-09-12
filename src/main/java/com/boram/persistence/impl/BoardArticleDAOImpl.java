@@ -1,6 +1,7 @@
 package com.boram.persistence.impl;
 
 import com.boram.domain.entity.BoardArticleEntity;
+import com.boram.domain.vo.BoardArticleVo;
 import com.boram.persistence.BoardArticleDAO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
     }
 
     @Override
-    public List<BoardArticleEntity> selectBoardArticleList() throws Exception {
-        return sqlSession.selectList(NAMESPACE + ".selectBoardArticleList");
+    public List<BoardArticleEntity> selectBoardArticleList(BoardArticleVo boardArticleVo) throws Exception {
+        return sqlSession.selectList(NAMESPACE + ".selectBoardArticleList", boardArticleVo);
     }
 
     @Override

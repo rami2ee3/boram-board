@@ -25,13 +25,14 @@ public class BoardController {
 
     // 게시판 리스트 페이지 view
     @GetMapping("/")
-    public String main(HttpServletRequest request, Model model) throws Exception {
-        List<BoardArticleEntity> boardArticleEntityList = boardArticleService.selectBoardArticleList();
+    public String list(BoardArticleVo boardArticleVo, Model model) throws Exception {
+        List<BoardArticleEntity> boardArticleEntityList = boardArticleService.selectBoardArticleList(boardArticleVo);
         model.addAttribute("boardList", boardArticleEntityList);
+        model.addAttribute("boardArticleVo", boardArticleVo);
 
         logger.info("조회 완료!!!");
 
-        return "main";
+        return "list";
     }
 
     // 게시판 상세 페이지 view

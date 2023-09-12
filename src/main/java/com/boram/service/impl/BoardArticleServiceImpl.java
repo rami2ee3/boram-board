@@ -1,6 +1,7 @@
 package com.boram.service.impl;
 
 import com.boram.domain.entity.BoardArticleEntity;
+import com.boram.domain.vo.BoardArticleVo;
 import com.boram.persistence.BoardArticleDAO;
 import com.boram.service.BoardArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class BoardArticleServiceImpl implements BoardArticleService {
     }
 
     @Override
-    public List<BoardArticleEntity> selectBoardArticleList() throws Exception {
-        return boardArticleDAO.selectBoardArticleList();
+    public List<BoardArticleEntity> selectBoardArticleList(BoardArticleVo boardArticleVo) throws Exception {
+        return boardArticleDAO.selectBoardArticleList(boardArticleVo);
     }
 
     @Override
