@@ -18,6 +18,16 @@
     #comments-btn {
         width: 10%;
     }
+
+    #pwInput {
+        width: 350px;
+        margin-top: 20px;
+    }
+
+    #delete_proc{
+        margin-top: 20px;
+    }
+
 </style>
 <body>
 <div class="card">
@@ -49,6 +59,11 @@
     <input type="password" id="comment-password" class="reply-writer form-control" placeholder="비밀 번호를 입력해 주세요">
     <button type="button" id="comments-btn" class="reply-btn btn btn-outline-primary" onclick="WriteComments();">댓글작성</button>
 </div>
+<div class="d-flex">
+<input type="password" id="pwInput" name="baPassword" style="display: none;" placeholder="삭제 하려면 비밀 번호를 입력해 주세요">
+<button type="submit" id="delete_proc" style="display: none;" onclick="OnDelete();">삭제</button>
+</div>
+
 <form id="frmBoard" name="frmBoard" method="GET">
     <input type="hidden" id="frmBoardBaId" name="baId" value="${boardArticleEntity.baId}">
     <input type="hidden" id="frmBoardCurrentPageNo" name="currentPageNo" value="1">
@@ -60,7 +75,7 @@
     <button type="button" class="btn btn-outline-info" onclick="">다음</button>
     <button type="button" class="btn btn-outline-secondary" onclick="OnMainPage();">목록으로</button>
     <button type="button" class="btn btn-outline-warning" onclick="OnModifyPage();">수정하기</button>
-    <button type="button" class="btn btn-outline-danger" onclick="DeleteConfirm();">삭제하기</button>
+    <button type="button" id="del-btn" class="btn btn-outline-danger">삭제하기</button>
 </div>
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/detail.js"></script>

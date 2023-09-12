@@ -21,6 +21,7 @@ public class BoardArticleServiceImpl implements BoardArticleService {
     public int insertBoardArticle(BoardArticleEntity boardArticleEntity) throws Exception {
 //        String password = boardArticleEntity.getBaPassword();
 //        String encodePassword =  bCryptPasswordEncoder.encode(password);
+//        boardArticleEntity.setBaPassword(encodePassword);
         boardArticleEntity.setBaPassword(bCryptPasswordEncoder.encode(boardArticleEntity.getBaPassword()));
 
         /*
@@ -45,6 +46,10 @@ public class BoardArticleServiceImpl implements BoardArticleService {
         return boardArticleDAO.selectOneBoard(id);
     }
 
+    public void updateReadCount(int id) throws Exception {
+        boardArticleDAO.updateReadCount(id);
+    }
+
     @Override
     public int deleteBoard(BoardArticleEntity boardArticleEntity) throws Exception {
         BoardArticleEntity originalBoardArticleEntity = boardArticleDAO.selectOneBoard(boardArticleEntity.getBaId());
@@ -63,20 +68,15 @@ public class BoardArticleServiceImpl implements BoardArticleService {
     @Override
     public int updateBoard(BoardArticleEntity boardArticleEntity) throws Exception {
         BoardArticleEntity originalBoardArticleEntity = boardArticleDAO.selectOneBoard(boardArticleEntity.getBaId());
-
         boolean passwordMatch = bCryptPasswordEncoder.matches(
                 boardArticleEntity.getBaPassword(),
                 originalBoardArticleEntity.getBaPassword());
 
         if (passwordMatch) {
             return boardArticleDAO.updateBoard(boardArticleEntity);
-
         } else {
             return 0;
         }
     }
 
-    public void updateReadCount(int id) throws Exception {
-        boardArticleDAO.updateReadCount(id);
-    }
 }

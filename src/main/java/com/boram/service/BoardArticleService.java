@@ -15,5 +15,4 @@ public interface BoardArticleService {
 
     int updateBoard(BoardArticleEntity boardArticleEntity) throws Exception;
 
-
 }

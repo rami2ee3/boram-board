@@ -32,7 +32,6 @@
             <button type="submit" class="btn btn-warning ms-auto">수정 완료</button>
             <button type="button" class="btn btn-secondary" onclick="OnDetailPage();">수정 취소</button>
         </div>
-
     </div>
 
     <input type="hidden" id="frmBoardBaId" name="baId" value="${boardArticleVo.baId}">

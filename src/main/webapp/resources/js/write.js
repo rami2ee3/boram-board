@@ -10,7 +10,6 @@ const OnWriteProc = () => {
     }
 
     const baPasswordConfirm = document.getElementById("ba_password_confirm");
-
     if (baPassword.value !== baPasswordConfirm.value) {
         alert('비밀 번호를 확인해 주세요.')
         baPasswordConfirm.focus();

@@ -21,6 +21,7 @@
     <button type="button" class="btn btn-outline-info mt-auto">검색</button>
 </div>
 <label for="exampleInputPassword1" class="form-label">
+
 <!-- proc 결과 -->
 <c:if test="${procName eq 'modifyProc'}">
     <c:choose>
@@ -35,6 +36,7 @@
     </c:choose>
 </c:if>
 </label>
+
 <table class="table table-hover mt-3">
     <thead>
     <tr>

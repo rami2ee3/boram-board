@@ -11,24 +11,30 @@ const OnModifyPage = () => {
 
 }
 
-const DeleteConfirm = () => {
-    const inputPassword = prompt('삭제하실 글의 비밀번호를 입력해주세요');
-    if (inputPassword === '') {
+// 버튼 요소와 input 요소를 가져옵니다.
+const showInputButton = document.getElementById('del-btn');
+const pwInput = document.getElementById('pwInput');
+const delete_proc = document.getElementById('delete_proc');
+
+// 버튼 클릭 이벤트 리스너를 추가합니다.
+showInputButton.addEventListener('click', function() {
+    // input 요소를 보이게 만듭니다.
+    pwInput.style.display = 'block';
+    delete_proc.style.display = 'block';
+});
+
+const OnDelete = () => {
+    const inputPassword = document.getElementById('pwInput');
+
+    if (inputPassword.value === '') {
         alert('비밀번호를 입력해주세요.');
-        return;
+        inputPassword.focus();
+        return false;
     }
-    // form태그에 넣어줄 password용 태그 생성
-    const baPasswordInput = document.createElement('input');
-    baPasswordInput.type = 'hidden';
-    baPasswordInput.name = 'baPassword';
-    baPasswordInput.value = inputPassword;
 
     const frmBoard = document.getElementById('frmBoard');
-
-    frmBoard.appendChild(baPasswordInput);
+    frmBoard.appendChild(inputPassword);
     frmBoard.action = '/delete_proc';
     frmBoard.method = 'POST';
     frmBoard.submit();
-
 }
-

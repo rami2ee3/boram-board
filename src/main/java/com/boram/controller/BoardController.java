@@ -4,6 +4,8 @@ import com.boram.domain.entity.BoardArticleEntity;
 import com.boram.domain.entity.BoardCommentsEntity;
 import com.boram.domain.vo.BoardArticleVo;
 import com.boram.service.BoardArticleService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ import java.util.List;
 @Controller
 public class BoardController {
 
+    private static final Logger logger = LogManager.getLogger(BoardController.class);
+
     @Autowired
     private BoardArticleService boardArticleService;
 
@@ -24,6 +28,9 @@ public class BoardController {
     public String main(HttpServletRequest request, Model model) throws Exception {
         List<BoardArticleEntity> boardArticleEntityList = boardArticleService.selectBoardArticleList();
         model.addAttribute("boardList", boardArticleEntityList);
+
+        logger.info("조회 완료!!!");
+
         return "main";
     }
 
@@ -44,7 +51,7 @@ public class BoardController {
     // 게시판 글쓰기 process
     @PostMapping("write_proc")
     public String writeProc(BoardArticleEntity boardArticleEntity) throws Exception {
-        System.out.println(boardArticleEntity.toString());
+        logger.info(boardArticleEntity.toString());
         boardArticleService.insertBoardArticle(boardArticleEntity);
         return "redirect:/";
     }
@@ -63,7 +70,7 @@ public class BoardController {
     public String modifyProc(BoardArticleVo vo, BoardArticleEntity entity, RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception{
         request.setAttribute("boardArticleVo", vo);
         int result = boardArticleService.updateBoard(entity);
-        System.out.println("Modify Result: " + result);
+        logger.info("Modify Result: " + result);
         redirectAttributes.addFlashAttribute("procName", "modifyProc");
         redirectAttributes.addFlashAttribute("result", result);
         return "redirect:/";
@@ -74,12 +81,11 @@ public class BoardController {
     public String deleteProc(BoardArticleVo vo, BoardArticleEntity entity, RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception{
         request.setAttribute("boardArticleVo", vo);
         int result = boardArticleService.deleteBoard(entity);
-        System.out.println("Delete Result: " + result);
+        logger.info("Delete Result: " + result);
         redirectAttributes.addFlashAttribute("procName", "deleteProc");
         redirectAttributes.addFlashAttribute("result", result);
         return "redirect:/";
     }
-
 
     // 댓글
 
