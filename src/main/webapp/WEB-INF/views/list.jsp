@@ -26,7 +26,7 @@
 <!-- proc 결과 -->
 <c:if test="${procName eq 'modifyProc'}">
     <c:choose>
-        <c:when test="${result > 0}">수정 완료되었습니다.</c:when>
+        <c:when test="${result > 0}">수정 완료 되었습니다.</c:when>
         <c:otherwise>오류 발생!!!!</c:otherwise>
     </c:choose>
 </c:if>
@@ -66,8 +66,8 @@
 <form id="frmBoard" name="frmBoard" method="GET">
     <input type="hidden" id="frmBoardBaId" name="baId" value="">
     <input type="hidden" id="frmBoardCurrentPageNo" name="currentPageNo" value="1">
-    <input type="hidden" id="frmBoardSearchType" name="searchType" value="">
-    <input type="hidden" id="frmBoardSearchKeyword" name="searchKeyword" value="">
+    <input type="hidden" id="frmBoardSearchType" name="searchType" value="${boardArticleVo.searchType}">
+    <input type="hidden" id="frmBoardSearchKeyword" name="searchKeyword" value="${boardArticleVo.searchKeyword}">
 </form>
 <script src="${pageContext.request.contextPath}/resources/js/list.js"></script>
 </body>

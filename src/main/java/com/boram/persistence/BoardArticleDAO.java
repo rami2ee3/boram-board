@@ -10,6 +10,8 @@ public interface BoardArticleDAO {
 
     List<BoardArticleEntity> selectBoardArticleList(BoardArticleVo boardArticleVo) throws Exception;
 
+    int selectBoardArticleTotalCount(BoardArticleVo boardArticleVo) throws Exception;
+
     BoardArticleEntity selectOneBoard(int id) throws Exception;
 
     void updateReadCount(int id) throws Exception;
@@ -17,7 +19,4 @@ public interface BoardArticleDAO {
     int deleteBoard(int id) throws Exception;
 
     int updateBoard(BoardArticleEntity boardArticleEntity) throws Exception;
-
-    //댓글
-
 }

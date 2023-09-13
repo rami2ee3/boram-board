@@ -4,6 +4,8 @@ import com.boram.domain.entity.BoardArticleEntity;
 import com.boram.domain.vo.BoardArticleVo;
 import com.boram.persistence.BoardArticleDAO;
 import com.boram.service.BoardArticleService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,13 +15,15 @@ import java.util.List;
 @Service
 public class BoardArticleServiceImpl implements BoardArticleService {
 
+    private static final Logger logger = LogManager.getLogger(BoardArticleServiceImpl.class);
+
     @Autowired
     private BoardArticleDAO boardArticleDAO;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public int insertBoardArticle(BoardArticleEntity boardArticleEntity) throws Exception {
+    public void insertBoardArticle(BoardArticleEntity boardArticleEntity) throws Exception {
 //        String password = boardArticleEntity.getBaPassword();
 //        String encodePassword =  bCryptPasswordEncoder.encode(password);
 //        boardArticleEntity.setBaPassword(encodePassword);
@@ -33,11 +37,20 @@ public class BoardArticleServiceImpl implements BoardArticleService {
         boolean passwordMatch = passwordEncoder.matches(memberDTO.getPassword(), userDTO.getPassword());
          */
 
-        return boardArticleDAO.insertBoardArticle(boardArticleEntity);
+        boardArticleDAO.insertBoardArticle(boardArticleEntity);
     }
 
     @Override
     public List<BoardArticleEntity> selectBoardArticleList(BoardArticleVo boardArticleVo) throws Exception {
+
+        int selectBoardArticleTotalCount = boardArticleDAO.selectBoardArticleTotalCount(boardArticleVo);
+        logger.info("selectBoardArticleTotalCount: " + selectBoardArticleTotalCount);
+
+        int COUNT_PER_PAGE = 5;
+        int offset = (((boardArticleVo.getCurrentPageNo() == 0) ? 1 : boardArticleVo.getCurrentPageNo()) - 1) * COUNT_PER_PAGE;
+        boardArticleVo.setOffset(offset);
+        boardArticleVo.setLimit(COUNT_PER_PAGE);
+
         return boardArticleDAO.selectBoardArticleList(boardArticleVo);
     }
 
@@ -79,5 +92,4 @@ public class BoardArticleServiceImpl implements BoardArticleService {
             return 0;
         }
     }
-
 }

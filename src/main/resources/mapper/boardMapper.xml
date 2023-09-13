@@ -5,19 +5,37 @@
 
     <!-- select -->
     <select id="selectBoardArticleList" resultType="com.boram.domain.entity.BoardArticleEntity" parameterType="com.boram.domain.vo.BoardArticleVo">
-        SELECT a.ba_id, a.ba_title, a.ba_contents, a.ba_insert_dt, a.ba_read_count,
-               a.ba_password
-          FROM board_article a
-         WHERE 1 = 1
+        SELECT a.*
+          FROM (
+            SELECT a.ba_id, a.ba_title, a.ba_contents, a.ba_insert_dt, a.ba_read_count,
+            a.ba_password
+            FROM board_article a
+            WHERE 1 = 1
             <if test="searchKeyword != ''">
-                  <if test="searchType == 'TITLE'">
+                <if test="searchType == 'TITLE'">
                     AND a.ba_title LIKE '%'||#{searchKeyword}||'%'
-                  </if>
-                  <if test="searchType == 'CONTENTS'">
+                </if>
+                <if test="searchType == 'CONTENTS'">
                     AND a.ba_contents LIKE '%'||#{searchKeyword}||'%'
-                  </if>
+                </if>
             </if>
-         ORDER BY a.ba_id DESC
+            ORDER BY a.ba_id DESC
+        ) a
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="selectBoardArticleTotalCount" resultType="int" parameterType="com.boram.domain.vo.BoardArticleVo">
+        SELECT COUNT(*) totalCount
+        FROM board_article a
+        WHERE 1 = 1
+        <if test="searchKeyword != ''">
+            <if test="searchType == 'TITLE'">
+                AND a.ba_title LIKE '%'||#{searchKeyword}||'%'
+            </if>
+            <if test="searchType == 'CONTENTS'">
+                AND a.ba_contents LIKE '%'||#{searchKeyword}||'%'
+            </if>
+        </if>
     </select>
 
     <select id="selectOneBoard" parameterType="int" resultType="com.boram.domain.entity.BoardArticleEntity">

@@ -28,7 +28,7 @@
             <AppenderRef ref="Console_Appender" />
 <!--            <AppenderRef ref="File_Appender"/>-->
         </Logger>
-        <Logger name="com.boram.controller" level="INFO" additivity="false">
+        <Logger name="com.boram" level="INFO" additivity="false">
             <AppenderRef ref="Console_Appender" />
 <!--            <AppenderRef ref="File_Appender"/>-->
         </Logger>

@@ -18,8 +18,11 @@ public class BoardArticleVo {
     private int baReadCount;
     private String baPassword;
 
-    private int currentPageNo;
     private String searchType;
     private String searchKeyword;
+
+    private int currentPageNo;
+    private int limit;
+    private int offset;
 
 }

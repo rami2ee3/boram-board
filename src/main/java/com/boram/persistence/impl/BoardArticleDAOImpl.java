@@ -28,6 +28,11 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
     }
 
     @Override
+    public int selectBoardArticleTotalCount (BoardArticleVo boardArticleVo) throws Exception {
+        return sqlSession.selectOne(NAMESPACE + ".selectBoardArticleTotalCount", boardArticleVo);
+    }
+
+    @Override
     public BoardArticleEntity selectOneBoard(int id) throws Exception {
         return sqlSession.selectOne(NAMESPACE + ".selectOneBoard", id);
     }
