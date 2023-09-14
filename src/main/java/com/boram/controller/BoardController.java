@@ -31,7 +31,8 @@ public class BoardController {
         model.addAttribute("boardArticleVo", boardArticleVo);
 
         logger.info("조회 완료!!!");
-
+        logger.info("boardArticleEntityList" + boardArticleEntityList);
+        logger.info("boardArticleVo"+ boardArticleVo);
         return "list";
     }
 

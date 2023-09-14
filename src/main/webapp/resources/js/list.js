@@ -29,3 +29,15 @@ document.getElementById("btnSearch").addEventListener("click", event => {
     const frmBoardSearch = document.getElementById("frmBoardSearch");
     frmBoardSearch.submit();
 });
+
+
+const changePage = (pageNumber) => {
+
+    // http://localhost:8080/?currentPageNo=2
+    // http://localhost:8080/?baId=&currentPageNo=1&searchType=&searchKeyword=
+
+    document.getElementById('frmBoardBaId').value = 0;
+    document.getElementById('frmBoardCurrentPageNo').value = pageNumber;
+    document.getElementById('frmBoard').action = "/";
+    document.getElementById('frmBoard').submit();
+}

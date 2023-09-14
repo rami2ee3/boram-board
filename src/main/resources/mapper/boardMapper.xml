@@ -22,6 +22,10 @@
             ORDER BY a.ba_id DESC
         ) a
         LIMIT #{limit} OFFSET #{offset}
+        <!--
+        SELECT * FROM 테이블명 LIMIT 숫자(A) OFFSET 숫자(B)
+        위 쿼리는 (B+1) 행 부터 ~ A 행 만큼 출력을 합니다.
+        -->
     </select>
 
     <select id="selectBoardArticleTotalCount" resultType="int" parameterType="com.boram.domain.vo.BoardArticleVo">

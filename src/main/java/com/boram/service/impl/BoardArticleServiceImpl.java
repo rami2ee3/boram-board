@@ -46,11 +46,27 @@ public class BoardArticleServiceImpl implements BoardArticleService {
         int selectBoardArticleTotalCount = boardArticleDAO.selectBoardArticleTotalCount(boardArticleVo);
         logger.info("selectBoardArticleTotalCount: " + selectBoardArticleTotalCount);
 
-        int COUNT_PER_PAGE = 5;
-        int offset = (((boardArticleVo.getCurrentPageNo() == 0) ? 1 : boardArticleVo.getCurrentPageNo()) - 1) * COUNT_PER_PAGE;
+        int countPerPage = 5;
+        int currentPageNo = (boardArticleVo.getCurrentPageNo() == 0) ? 1 : boardArticleVo.getCurrentPageNo();
+        int offset = ((currentPageNo) - 1) * countPerPage;
         boardArticleVo.setOffset(offset);
-        boardArticleVo.setLimit(COUNT_PER_PAGE);
+        boardArticleVo.setLimit(countPerPage);
 
+//        int currentBlock = ((currentPageNo % countPerPage) == 0) ? currentPageNo / countPerPage : currentPageNo / countPerPage + 1;
+//        int startPage = (currentBlock - 1) * countPerPage + 1;
+        int startPage = 1;
+        int endPage = (selectBoardArticleTotalCount / countPerPage) + 1;
+//        int endPage = startPage + countPerPage - 1;
+
+//        if (endPage > selectBoardArticleTotalCount){
+//            endPage = selectBoardArticleTotalCount;
+//        }
+
+        boardArticleVo.setCurrentPageNo(currentPageNo);
+        boardArticleVo.setTotalCount(selectBoardArticleTotalCount);
+        boardArticleVo.setStartPage(startPage);
+        boardArticleVo.setEndPage(endPage);
+        
         return boardArticleDAO.selectBoardArticleList(boardArticleVo);
     }
 

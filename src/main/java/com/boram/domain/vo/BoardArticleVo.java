@@ -24,5 +24,9 @@ public class BoardArticleVo {
     private int currentPageNo;
     private int limit;
     private int offset;
+    private int totalCount;
+    private int startPage;
+    private int endPage;
+
 
 }

@@ -5,7 +5,12 @@
 <html>
 
 <%@include file="./include/header.jsp" %>
-
+<style>
+    .pagination{
+        display: flex;
+        justify-content: center;
+    }
+</style>
 
 <body>
 <form id="frmBoardSearch" name="frmBoardSearch" method="get" action="">
@@ -60,12 +65,29 @@
     </c:forEach>
     </tbody>
 </table>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+    <c:forEach var="page" begin="1" end="${boardArticleVo.endPage}">
+        <li class="page-item"><a class="page-link" onclick="changePage('${page}')" style="cursor: pointer">${page}</a></li>
+    </c:forEach>
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 <div class="d-flex">
     <button type="button" class="btn btn-success ms-auto" onclick="OnWritePage();">작성하기</button>
 </div>
 <form id="frmBoard" name="frmBoard" method="GET">
     <input type="hidden" id="frmBoardBaId" name="baId" value="">
-    <input type="hidden" id="frmBoardCurrentPageNo" name="currentPageNo" value="1">
+    <input type="hidden" id="frmBoardCurrentPageNo" name="currentPageNo" value="${boardArticleVo.currentPageNo}">
     <input type="hidden" id="frmBoardSearchType" name="searchType" value="${boardArticleVo.searchType}">
     <input type="hidden" id="frmBoardSearchKeyword" name="searchKeyword" value="${boardArticleVo.searchKeyword}">
 </form>
