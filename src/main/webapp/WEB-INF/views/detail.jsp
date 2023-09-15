@@ -7,7 +7,7 @@
 <%@include file="./include/header.jsp" %>
 
 <style>
-    #comments {
+    #contents {
         width: 65%;
     }
 
@@ -54,9 +54,9 @@
 </div>
 
 <div class="input-group mt-3">
-    <input type="text" id="comments" class="reply-content form-control" placeholder="댓글 내용을 입력해 주세요"
+    <input type="text" id="contents" name="contents" class="reply-content form-control" placeholder="댓글 내용을 입력해 주세요"
            aria-describedby="reply-btn">
-    <input type="password" id="comment-password" class="reply-writer form-control" placeholder="비밀 번호를 입력해 주세요">
+    <input type="password" id="comment-password" name="comment-password" class="reply-writer form-control" placeholder="비밀 번호를 입력해 주세요">
     <button type="button" id="comments-btn" class="reply-btn btn btn-outline-primary" onclick="WriteComments();">댓글작성</button>
 </div>
 <div class="d-flex">

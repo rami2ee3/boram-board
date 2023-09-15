@@ -1,7 +1,9 @@
 package com.boram.controller;
 
 import com.boram.domain.entity.BoardArticleEntity;
+import com.boram.domain.entity.BoardCommentsEntity;
 import com.boram.domain.vo.BoardArticleVo;
+import com.boram.domain.vo.BoardCommentsVO;
 import com.boram.service.BoardArticleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -41,6 +44,10 @@ public class BoardController {
     public String detail(BoardArticleVo boardArticleVo, Model model) throws Exception {
         BoardArticleEntity boardArticleEntity = boardArticleService.selectOneBoard(boardArticleVo.getBaId());
         model.addAttribute("boardArticleEntity", boardArticleEntity);
+
+        List<BoardCommentsEntity> commentsList = boardArticleService.selectBoardCommentsList(boardArticleVo.getBaId());
+        model.addAttribute("commentsList", commentsList);
+
         return "detail";
     }
 

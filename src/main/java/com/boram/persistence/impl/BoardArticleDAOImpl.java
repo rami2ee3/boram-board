@@ -1,6 +1,7 @@
 package com.boram.persistence.impl;
 
 import com.boram.domain.entity.BoardArticleEntity;
+import com.boram.domain.entity.BoardCommentsEntity;
 import com.boram.domain.vo.BoardArticleVo;
 import com.boram.persistence.BoardArticleDAO;
 import org.apache.ibatis.session.SqlSession;
@@ -50,5 +51,15 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
     @Override
     public int updateBoard(BoardArticleEntity vo) throws Exception {
         return sqlSession.update(NAMESPACE + ".updateBoard", vo);
+    }
+
+    @Override
+    public int insertBoardComments(BoardCommentsEntity boardCommentsEntity) throws Exception {
+        return sqlSession.insert(NAMESPACE + ".insertBoardComments",boardCommentsEntity);
+    }
+
+    @Override
+    public List<BoardCommentsEntity> selectBoardCommentsList(int boardArticleId) throws Exception {
+        return sqlSession.selectList(NAMESPACE + ".selectBoardCommentsList", boardArticleId);
     }
 }

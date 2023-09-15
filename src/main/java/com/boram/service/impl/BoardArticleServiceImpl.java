@@ -1,6 +1,7 @@
 package com.boram.service.impl;
 
 import com.boram.domain.entity.BoardArticleEntity;
+import com.boram.domain.entity.BoardCommentsEntity;
 import com.boram.domain.vo.BoardArticleVo;
 import com.boram.persistence.BoardArticleDAO;
 import com.boram.service.BoardArticleService;
@@ -107,5 +108,16 @@ public class BoardArticleServiceImpl implements BoardArticleService {
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public void insertBoardComments(BoardCommentsEntity boardCommentsEntity) throws Exception {
+        boardCommentsEntity.setBcPassword(bCryptPasswordEncoder.encode(boardCommentsEntity.getBcPassword()));
+        boardArticleDAO.insertBoardComments(boardCommentsEntity);
+    }
+
+    @Override
+    public List<BoardCommentsEntity> selectBoardCommentsList(int boardArticleId) throws Exception {
+        return boardArticleDAO.selectBoardCommentsList(boardArticleId);
     }
 }

@@ -54,6 +54,12 @@
          WHERE ba_id = #{ba_id}
     </select>
 
+    <select id="selectBoardCommentsList" resultType="com.boram.domain.entity.BoardCommentsEntity" parameterType="int">
+        SELECT *
+          FROM board_comments
+         WHERE ba_id = #{ba_id}
+    </select>
+
     <!-- insert -->
     <insert id="insertBoardArticle" parameterType="com.boram.domain.entity.BoardArticleEntity">
         <selectKey keyProperty="baId" resultType="int" order="BEFORE">
@@ -68,6 +74,20 @@
                        0,
                        #{baPassword}
                    )
+    </insert>
+
+    <insert id="insertBoardComments" parameterType="com.boram.domain.entity.BoardCommentsEntity">
+        <selectKey keyProperty="bcId" resultType="int" order="BEFORE">
+            SELECT NEXTVAL('seq_bc_id') bcId
+        </selectKey>
+            insert into board_comments (bc_id, ba_id, bc_contents, bc_password, bc_insert_dt)
+            values (
+                        #{bcId},
+                        #{baId},
+                        #{bcContents},
+                        #{bcPassword},
+                        now());
+                    )
     </insert>
 
     <!-- update -->

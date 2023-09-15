@@ -67,19 +67,9 @@
 </table>
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
     <c:forEach var="page" begin="1" end="${boardArticleVo.endPage}">
         <li class="page-item"><a class="page-link" onclick="changePage('${page}')" style="cursor: pointer">${page}</a></li>
     </c:forEach>
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
     </ul>
 </nav>
 <div class="d-flex">

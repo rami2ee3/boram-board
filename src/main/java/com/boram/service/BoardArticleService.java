@@ -1,6 +1,7 @@
 package com.boram.service;
 
 import com.boram.domain.entity.BoardArticleEntity;
+import com.boram.domain.entity.BoardCommentsEntity;
 import com.boram.domain.vo.BoardArticleVo;
 
 import java.util.List;
@@ -15,4 +16,8 @@ public interface BoardArticleService {
     int deleteBoard(BoardArticleEntity boardArticleEntity) throws Exception;
 
     int updateBoard(BoardArticleEntity boardArticleEntity) throws Exception;
+
+    void insertBoardComments(BoardCommentsEntity boardCommentsEntity) throws Exception;
+
+    List<BoardCommentsEntity> selectBoardCommentsList(int boardArticleId) throws Exception;
 }
