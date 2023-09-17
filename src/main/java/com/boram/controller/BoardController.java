@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +36,7 @@ public class BoardController {
 
         logger.info("조회 완료!!!");
         logger.info("boardArticleEntityList" + boardArticleEntityList);
-        logger.info("boardArticleVo"+ boardArticleVo);
+        logger.info("boardArticleVo" + boardArticleVo);
         return "list";
     }
 
@@ -67,7 +68,7 @@ public class BoardController {
 
     // 글 수정 페이지 view
     @PostMapping("modify")
-    public String modify(BoardArticleVo boardArticleVo, Model model) throws Exception{
+    public String modify(BoardArticleVo boardArticleVo, Model model) throws Exception {
         BoardArticleEntity boardArticleEntity = boardArticleService.selectOneBoard(boardArticleVo.getBaId());
         model.addAttribute("boardArticleEntity", boardArticleEntity);
         model.addAttribute("boardArticleVo", boardArticleVo);
@@ -76,7 +77,7 @@ public class BoardController {
 
     // 글 수정 페이지 process
     @PostMapping("modify_proc")
-    public String modifyProc(BoardArticleVo vo, BoardArticleEntity entity, RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception{
+    public String modifyProc(BoardArticleVo vo, BoardArticleEntity entity, RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
         request.setAttribute("boardArticleVo", vo);
         int result = boardArticleService.updateBoard(entity);
         logger.info("Modify Result: " + result);
@@ -87,13 +88,29 @@ public class BoardController {
 
     // 글 삭제 process
     @PostMapping("delete_proc")
-    public String deleteProc(BoardArticleVo vo, BoardArticleEntity entity, RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception{
+    public String deleteProc(BoardArticleVo vo, BoardArticleEntity entity, RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
         request.setAttribute("boardArticleVo", vo);
         int result = boardArticleService.deleteBoard(entity);
         logger.info("Delete Result: " + result);
         redirectAttributes.addFlashAttribute("procName", "deleteProc");
         redirectAttributes.addFlashAttribute("result", result);
         return "redirect:/";
+    }
+
+    // 댓글 작성 axios
+    @PostMapping("comment_proc")
+    public @ResponseBody String commentProc(BoardCommentsEntity entity) throws Exception {
+        String result = "N";
+        try {
+            logger.info("commentProc call...");
+            logger.info(entity);
+            boardArticleService.insertBoardComments(entity);
+            // TODO : 댓글 작성이후 데이터 화면에 어떤방식으로 표기할지?
+            result = "Y";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }

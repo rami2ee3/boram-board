@@ -86,8 +86,8 @@
                         #{baId},
                         #{bcContents},
                         #{bcPassword},
-                        now());
-                    )
+                        now()
+                    );
     </insert>
 
     <!-- update -->

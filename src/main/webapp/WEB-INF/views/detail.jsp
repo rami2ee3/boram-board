@@ -24,7 +24,7 @@
         margin-top: 20px;
     }
 
-    #delete_proc{
+    #delete_proc {
         margin-top: 20px;
     }
 
@@ -32,7 +32,8 @@
 <body>
 <div class="card">
     <b class="card-header">${boardArticleEntity.baTitle}</b>
-    <span class="card-header">작성일자 : <fmt:formatDate value="${boardArticleEntity.baInsertDt}" pattern="yyyy.MM.dd"/></span>
+    <span class="card-header">작성일자 : <fmt:formatDate value="${boardArticleEntity.baInsertDt}"
+                                                     pattern="yyyy.MM.dd"/></span>
     <div class="card-body">
         <pre class="card-text">${boardArticleEntity.baContents}</pre>
     </div>
@@ -56,12 +57,14 @@
 <div class="input-group mt-3">
     <input type="text" id="contents" name="contents" class="reply-content form-control" placeholder="댓글 내용을 입력해 주세요"
            aria-describedby="reply-btn">
-    <input type="password" id="comment-password" name="comment-password" class="reply-writer form-control" placeholder="비밀 번호를 입력해 주세요">
-    <button type="button" id="comments-btn" class="reply-btn btn btn-outline-primary" onclick="WriteComments();">댓글작성</button>
+    <input type="password" id="comment-password" name="comment-password" class="reply-writer form-control"
+           placeholder="비밀 번호를 입력해 주세요">
+    <button type="button" id="comments-btn" class="reply-btn btn btn-outline-primary" onclick="WriteComments();">댓글작성
+    </button>
 </div>
 <div class="d-flex">
-<input type="password" id="pwInput" name="baPassword" style="display: none;" placeholder="삭제 하려면 비밀 번호를 입력해 주세요">
-<button type="submit" id="delete_proc" style="display: none;" onclick="OnDelete();">삭제</button>
+    <input type="password" id="pwInput" name="baPassword" style="display: none;" placeholder="삭제 하려면 비밀 번호를 입력해 주세요">
+    <button type="submit" id="delete_proc" style="display: none;" onclick="OnDelete();">삭제</button>
 </div>
 
 <form id="frmBoard" name="frmBoard" method="GET">
