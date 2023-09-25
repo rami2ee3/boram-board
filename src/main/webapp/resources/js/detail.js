@@ -56,7 +56,7 @@ const WriteComments = () => {
             if (data === 'Y') {
                 // TODO: 댓글 작성 성공 이후 액션 어떻게 할지
             } else {
-                alert('댓글 등록에 실패하였습니다.')
+                alert('댓글 등록에 실패 하였습니다.')
             }
         })
         .catch(function (error) {

@@ -3,11 +3,12 @@ package com.boram.service;
 import com.boram.domain.entity.BoardArticleEntity;
 import com.boram.domain.entity.BoardCommentsEntity;
 import com.boram.domain.vo.BoardArticleVo;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
 
 public interface BoardArticleService {
-    void insertBoardArticle(BoardArticleEntity boardArticleEntity) throws Exception;
+    void insertBoardArticle(BoardArticleEntity boardArticleEntity, MultipartHttpServletRequest mpRequest) throws Exception;
 
     List<BoardArticleEntity> selectBoardArticleList(BoardArticleVo boardArticleVo) throws Exception;
 

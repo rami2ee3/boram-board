@@ -6,7 +6,7 @@
 
 <body>
 <div class="d-flex flex-column gap-4">
-    <form name="frmBoard" id="frmBoard" method="POST" action="/write_proc" onsubmit="return OnWriteProc();">
+    <form name="frmBoard" id="frmBoard" method="POST" action="/write_proc" enctype="multipart/form-data" onsubmit="return OnWriteProc();">
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">제목</span>
             <input type="text" name="baTitle" id="ba_title" class="form-control" placeholder="글 제목을 입력하세요"
@@ -18,6 +18,9 @@
                     id="floatingTextarea2"
                     style="height: 100px"></textarea>
             <label for="floatingTextarea2">글 내용</label>
+        </div>
+        <div>
+            <input type="file" name="file">
         </div>
         <div class="form-floating w-25">
             <input type="password" name="baPassword" id="ba_password" class="form-control" id="floatingPassword"

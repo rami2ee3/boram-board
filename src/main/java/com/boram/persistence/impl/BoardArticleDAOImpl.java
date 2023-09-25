@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class BoardArticleDAOImpl implements BoardArticleDAO {
@@ -61,5 +62,10 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
     @Override
     public List<BoardCommentsEntity> selectBoardCommentsList(int boardArticleId) throws Exception {
         return sqlSession.selectList(NAMESPACE + ".selectBoardCommentsList", boardArticleId);
+    }
+
+    @Override
+    public void insertFile(Map<String, Object> map) throws Exception {
+        sqlSession.insert(NAMESPACE + ".insertFile", map);
     }
 }

@@ -90,6 +90,13 @@
                     );
     </insert>
 
+<!--    <insert id="insertFile" parameterType="com.boram.domain.entity.BoardArticleEntity" keyProperty="bfId">-->
+<!--        <selectKey keyProperty="bfId" resultType="int" order="BEFORE">-->
+<!--            SELECT NEXTVAL('seq_bf_id') bfId-->
+<!--        </selectKey>-->
+<!--            INSERT INTO -->
+<!--    </insert>-->
+
     <!-- update -->
     <update id="updateReadCount" parameterType="int">
         UPDATE board_article
@@ -104,6 +111,12 @@
          WHERE ba_id = #{baId}
     </update>
 
+    <update id="updateComments" parameterType="com.boram.domain.entity.BoardCommentsEntity">
+        update board_comments
+        set bc_contents = 123456
+        where ba_id = 41;
+    </update>
+    
     <!-- delete -->
     <delete id="deleteBoard" parameterType="int">
         DELETE

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,9 +61,9 @@ public class BoardController {
 
     // 게시판 글쓰기 process
     @PostMapping("write_proc")
-    public String writeProc(BoardArticleEntity boardArticleEntity) throws Exception {
+    public String writeProc(BoardArticleEntity boardArticleEntity, MultipartHttpServletRequest mpRequest) throws Exception {
         logger.info(boardArticleEntity.toString());
-        boardArticleService.insertBoardArticle(boardArticleEntity);
+        boardArticleService.insertBoardArticle(boardArticleEntity, mpRequest);
         return "redirect:/";
     }
 
@@ -105,7 +106,7 @@ public class BoardController {
             logger.info("commentProc call...");
             logger.info(entity);
             boardArticleService.insertBoardComments(entity);
-            // TODO : 댓글 작성이후 데이터 화면에 어떤방식으로 표기할지?
+            // TODO : 댓글 작성 이후 데이터 화면에 어떤 방식으로 표기 할지?
             result = "Y";
         } catch (Exception e) {
             e.printStackTrace();

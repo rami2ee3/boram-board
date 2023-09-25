@@ -5,6 +5,7 @@ import com.boram.domain.entity.BoardCommentsEntity;
 import com.boram.domain.vo.BoardArticleVo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BoardArticleDAO {
     int insertBoardArticle(BoardArticleEntity boardArticleEntity) throws Exception;
@@ -24,4 +25,6 @@ public interface BoardArticleDAO {
     int insertBoardComments(BoardCommentsEntity boardCommentsEntity) throws Exception;
 
     List<BoardCommentsEntity> selectBoardCommentsList(int boardArticleId) throws Exception;
+
+    void insertFile(Map<String, Object> map) throws Exception;
 }

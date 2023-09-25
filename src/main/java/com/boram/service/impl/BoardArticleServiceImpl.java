@@ -5,13 +5,16 @@ import com.boram.domain.entity.BoardCommentsEntity;
 import com.boram.domain.vo.BoardArticleVo;
 import com.boram.persistence.BoardArticleDAO;
 import com.boram.service.BoardArticleService;
+import com.boram.util.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BoardArticleServiceImpl implements BoardArticleService {
@@ -19,16 +22,24 @@ public class BoardArticleServiceImpl implements BoardArticleService {
     private static final Logger logger = LogManager.getLogger(BoardArticleServiceImpl.class);
 
     @Autowired
+    private FileUtils fileUtils;
+    @Autowired
     private BoardArticleDAO boardArticleDAO;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void insertBoardArticle(BoardArticleEntity boardArticleEntity) throws Exception {
+    public void insertBoardArticle(BoardArticleEntity boardArticleEntity, MultipartHttpServletRequest mpRequest ) throws Exception {
 //        String password = boardArticleEntity.getBaPassword();
 //        String encodePassword =  bCryptPasswordEncoder.encode(password);
 //        boardArticleEntity.setBaPassword(encodePassword);
         boardArticleEntity.setBaPassword(bCryptPasswordEncoder.encode(boardArticleEntity.getBaPassword()));
+
+        List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(boardArticleEntity, mpRequest);
+        int size = list.size();
+        for(int i = 0; i < size; i++){
+            boardArticleDAO.insertFile(list.get(i));
+        }
 
         /*
         <!-- 암호화 -->
