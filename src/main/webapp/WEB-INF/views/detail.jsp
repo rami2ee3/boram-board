@@ -46,8 +46,8 @@
                     ${comments.bcContents}
                 <div class="d-flex ms-auto gap-3">
                     <span class="badge bg-secondary rounded-pill">${comments.bcInsertDt}</span>
-                    <i class="bi bi-pencil-square cursor" onclick="OnModifyComments()"></i>
-                    <i class="bi bi-x-square cursor" onclick="OnDeleteComments()"></i>
+                    <i class="bi bi-pencil-square cursor" onclick="OnModifyComments('${comments.bcId}')"></i>
+                    <i class="bi bi-x-square cursor" onclick="OnDeleteComments('${comments.bcId}')"></i>
                 </div>
             </li>
         </c:forEach>

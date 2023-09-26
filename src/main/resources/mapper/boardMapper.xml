@@ -60,6 +60,12 @@
          WHERE ba_id = #{ba_id}
     </select>
 
+    <select id="selectComments" resultType="com.boram.domain.entity.BoardCommentsEntity" parameterType="int">
+        SELECT *
+          FROM board_comments
+         WHERE bc_id = #{bc_id}
+    </select>
+
     <!-- insert -->
     <insert id="insertBoardArticle" parameterType="com.boram.domain.entity.BoardArticleEntity">
         <selectKey keyProperty="baId" resultType="int" order="BEFORE">
@@ -90,13 +96,6 @@
                     );
     </insert>
 
-<!--    <insert id="insertFile" parameterType="com.boram.domain.entity.BoardArticleEntity" keyProperty="bfId">-->
-<!--        <selectKey keyProperty="bfId" resultType="int" order="BEFORE">-->
-<!--            SELECT NEXTVAL('seq_bf_id') bfId-->
-<!--        </selectKey>-->
-<!--            INSERT INTO -->
-<!--    </insert>-->
-
     <!-- update -->
     <update id="updateReadCount" parameterType="int">
         UPDATE board_article
@@ -122,6 +121,12 @@
         DELETE
           FROM board_article
          WHERE ba_id = #{ba_id}
+    </delete>
+
+    <delete id="deleteComment" parameterType="int">
+        DELETE
+          FROM board_comments
+         WHERE bc_id = #{bc_id}
     </delete>
 
 </mapper>

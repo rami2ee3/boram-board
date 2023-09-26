@@ -68,4 +68,14 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
     public void insertFile(Map<String, Object> map) throws Exception {
         sqlSession.insert(NAMESPACE + ".insertFile", map);
     }
+
+    @Override
+    public BoardCommentsEntity selectComments(int bcId) throws Exception {
+        return sqlSession.selectOne(NAMESPACE + ".selectComments", bcId);
+    }
+
+    @Override
+    public int deleteComment(int bcID) throws Exception {
+        return sqlSession.delete(NAMESPACE + ".deleteComment", bcID);
+    }
 }

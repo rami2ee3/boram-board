@@ -27,4 +27,8 @@ public interface BoardArticleDAO {
     List<BoardCommentsEntity> selectBoardCommentsList(int boardArticleId) throws Exception;
 
     void insertFile(Map<String, Object> map) throws Exception;
+
+    BoardCommentsEntity selectComments(int bcId) throws Exception;
+
+    int deleteComment(int bcID) throws Exception;
 }

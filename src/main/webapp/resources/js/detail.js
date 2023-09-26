@@ -40,6 +40,18 @@ const OnDelete = () => {
     frmBoard.submit();
 }
 
+const OnModifyComments = (bcId) => {
+    if(bcPassword.value === ''){
+        alert('패스워드를 입력해 주세요.');
+
+    }
+
+}
+
+const OnDeleteComments = (bcId) => {
+    alert(bcId);
+}
+
 // 댓글 작성
 const WriteComments = () => {
     // 댓글용 데이터 생성
@@ -48,18 +60,46 @@ const WriteComments = () => {
     const bcPassword = document.querySelector('#comment-password').value;
     const data = {baId, bcContents, bcPassword}
     // form 데이터 생성
-    const config = {headers: {"Content-Type": "application/x-www-form-urlencoded"}}
+    // const config = {headers: {"Content-Type": "application/x-www-form-urlencoded"}}
+    const formData = new FormData();
+    formData.append('baId', baId);
+    formData.append('bcContents', bcContents);
+    formData.append('bcPassword', bcPassword);
+
     // axios 호출
-    axios.post('/comment_proc', data, config)
-        .then(function (response) {
-            const result = response.data;
-            if (data === 'Y') {
-                // TODO: 댓글 작성 성공 이후 액션 어떻게 할지
-            } else {
-                alert('댓글 등록에 실패 하였습니다.')
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    axios.post('/comment_proc', formData)
+    .then(function (response) {
+        console.log(response);
+        const result = response.data.result;
+        console.log(`result: ${result}`);
+
+        if(result === 'Y') {
+            const newComments = response.data.data;
+
+            const replyHTML = `
+                <li class="list-group-item d-flex align-items-center">
+                    ${newComments.bcContents}
+                <div class="d-flex ms-auto gap-3">
+                    <span class="badge bg-secondary rounded-pill">${newComments.bcInsertDt}</span>
+                    <i class="bi bi-pencil-square cursor" onclick="OnModifyComments('${newComments.bcId}')"></i>
+                    <i class="bi bi-x-square cursor" onclick="OnDeleteComments('${newComments.bcId}')"></i>
+                </div>
+            </li>
+            `;
+
+            document.querySelector('#comment-list').innerHTML = document.querySelector('#comment-list').innerHTML + replyHTML;
+
+            document.getElementById('contents').value='';
+            document.getElementById('comment-password').value='';
+
+            alert('댓글이 등록되었습니다.');
+        } else if(result === 'N') {
+            alert('댓글이 등록되지 않았습니다.');
+        } else if(result === 'E') {
+            alert('댓글 등록중 오류가 발생했습니다.');
+        }
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
 }

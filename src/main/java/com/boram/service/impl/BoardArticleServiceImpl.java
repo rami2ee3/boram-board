@@ -122,13 +122,23 @@ public class BoardArticleServiceImpl implements BoardArticleService {
     }
 
     @Override
-    public void insertBoardComments(BoardCommentsEntity boardCommentsEntity) throws Exception {
+    public int insertBoardComments(BoardCommentsEntity boardCommentsEntity) throws Exception {
         boardCommentsEntity.setBcPassword(bCryptPasswordEncoder.encode(boardCommentsEntity.getBcPassword()));
-        boardArticleDAO.insertBoardComments(boardCommentsEntity);
+        return boardArticleDAO.insertBoardComments(boardCommentsEntity);
     }
 
     @Override
     public List<BoardCommentsEntity> selectBoardCommentsList(int boardArticleId) throws Exception {
         return boardArticleDAO.selectBoardCommentsList(boardArticleId);
+    }
+
+    @Override
+    public BoardCommentsEntity selectComments(int bcId) throws Exception {
+        return boardArticleDAO.selectComments(bcId);
+    }
+
+    @Override
+    public int deleteComment(int bcID) throws Exception {
+        return boardArticleDAO.deleteComment(bcID);
     }
 }

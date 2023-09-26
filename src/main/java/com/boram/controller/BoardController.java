@@ -3,7 +3,6 @@ package com.boram.controller;
 import com.boram.domain.entity.BoardArticleEntity;
 import com.boram.domain.entity.BoardCommentsEntity;
 import com.boram.domain.vo.BoardArticleVo;
-import com.boram.domain.vo.BoardCommentsVO;
 import com.boram.service.BoardArticleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,12 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BoardController {
@@ -100,18 +101,31 @@ public class BoardController {
 
     // 댓글 작성 axios
     @PostMapping("comment_proc")
-    public @ResponseBody String commentProc(BoardCommentsEntity entity) throws Exception {
-        String result = "N";
+    @ResponseBody
+    public Map<String, Object> commentProc(BoardCommentsEntity entity) throws Exception {
+        Map<String, Object> returnMap = new HashMap<>();
+
         try {
-            logger.info("commentProc call...");
-            logger.info(entity);
-            boardArticleService.insertBoardComments(entity);
-            // TODO : 댓글 작성 이후 데이터 화면에 어떤 방식으로 표기 할지?
-            result = "Y";
+            int insertCount = boardArticleService.insertBoardComments(entity);
+            logger.info("commentId: " + insertCount);
+            logger.info(entity.toString());
+            BoardCommentsEntity newCommentEntity = boardArticleService.selectComments(entity.getBcId());
+
+            if(insertCount == 1) {
+                returnMap.put("result", "Y");
+                returnMap.put("data", newCommentEntity);
+            } else {
+                returnMap.put("result", "N");
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            returnMap.put("result", "E");
+            logger.debug(e.getMessage());
         }
-        return result;
+
+        return returnMap;
     }
+
+    // 댓글 삭제
+
 
 }

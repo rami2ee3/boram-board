@@ -18,7 +18,11 @@ public interface BoardArticleService {
 
     int updateBoard(BoardArticleEntity boardArticleEntity) throws Exception;
 
-    void insertBoardComments(BoardCommentsEntity boardCommentsEntity) throws Exception;
+    int insertBoardComments(BoardCommentsEntity boardCommentsEntity) throws Exception;
 
     List<BoardCommentsEntity> selectBoardCommentsList(int boardArticleId) throws Exception;
+
+    BoardCommentsEntity selectComments(int bcId) throws Exception;
+
+    int deleteComment(int bcID) throws Exception;
 }
