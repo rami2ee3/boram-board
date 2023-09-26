@@ -46,6 +46,7 @@ public class BoardController {
     @GetMapping("detail")
     public String detail(BoardArticleVo boardArticleVo, Model model) throws Exception {
         BoardArticleEntity boardArticleEntity = boardArticleService.selectOneBoard(boardArticleVo.getBaId());
+        model.addAttribute("boardArticleVo", boardArticleVo);
         model.addAttribute("boardArticleEntity", boardArticleEntity);
 
         List<BoardCommentsEntity> commentsList = boardArticleService.selectBoardCommentsList(boardArticleVo.getBaId());
@@ -111,7 +112,7 @@ public class BoardController {
             logger.info(entity.toString());
             BoardCommentsEntity newCommentEntity = boardArticleService.selectComments(entity.getBcId());
 
-            if(insertCount == 1) {
+            if (insertCount == 1) {
                 returnMap.put("result", "Y");
                 returnMap.put("data", newCommentEntity);
             } else {
