@@ -1,8 +1,7 @@
 const OnMainPage = () => {
     const form = document.querySelector('#frmBoard');
-    history.go(-1);
-    //form.action = '/';
-    //form.submit();
+    form.action = '/';
+    form.submit();
 }
 
 const OnModifyPage = () => {
@@ -41,30 +40,26 @@ const OnDelete = () => {
 }
 
 const OnModifyComments = (bcId) => {
-    const bcPassword = document.querySelector('#comment-password').value;
-    const enteredPassword = prompt('비밀번호를 입력하세요:');
-    if (enteredPassword === bcPassword) {
-        // 비밀번호가 일치하는 경우 수정
-
-
+    const bcPassword = prompt('비밀번호를 입력해주세요')
+    if (bcPassword === '') {
+        alert('비밀번호를 입력해주세요')
+        return
     } else {
-        // 비밀번호가 일치하지 않는 경우
-        alert('비밀번호가 일치하지 않습니다.');
+        // TODO : 비밀번호 입력했으면 입력값 검증 axios로 호출
+        const viewComment = document.querySelector(`#viewComment-${bcId}`);
+        viewComment.classList.remove('d-block')
+        viewComment.classList.add('d-none')
+        const editComment = document.querySelector(`#editComment-${bcId}`);
+        editComment.classList.remove('d-none')
+        editComment.classList.add('d-block')
+        //
+
     }
+
 }
 
 const OnDeleteComments = (bcId) => {
-    const bcPassword = document.querySelector('#comment-password').value;
-    const enteredPassword = prompt('비밀번호를 입력하세요:');
-
-    if (enteredPassword === bcPassword) {
-        // 비밀번호가 일치하는 경우 삭제
-        axios.delete(`/comment_proc/${bcId}`)
-
-    } else {
-        // 비밀번호가 일치하지 않는 경우
-        alert('비밀번호가 일치하지 않습니다.');
-    }
+    alert(bcId);
 }
 
 // 댓글 작성
@@ -83,15 +78,15 @@ const WriteComments = () => {
 
     // axios 호출
     axios.post('/comment_proc', formData)
-    .then(function (response) {
-        console.log(response);
-        const result = response.data.result;
-        console.log(`result: ${result}`);
+        .then(function (response) {
+            console.log(response);
+            const result = response.data.result;
+            console.log(`result: ${result}`);
 
-        if(result === 'Y') {
-            const newComments = response.data.data;
+            if (result === 'Y') {
+                const newComments = response.data.data;
 
-            const replyHTML = `
+                const replyHTML = `
                 <li class="list-group-item d-flex align-items-center">
                     ${newComments.bcContents}
                 <div class="d-flex ms-auto gap-3">
@@ -102,19 +97,21 @@ const WriteComments = () => {
             </li>
             `;
 
-            document.querySelector('#comment-list').innerHTML = document.querySelector('#comment-list').innerHTML + replyHTML;
 
-            document.getElementById('contents').value='';
-            document.getElementById('comment-password').value='';
+                // document.querySelector('#comment-list').innerHTML = document.querySelector('#comment-list').innerHTML + replyHTML;
+                document.querySelector('#comment-list').insertAdjacentHTML('afterend', replyHTML);
 
-            alert('댓글이 등록되었습니다.');
-        } else if(result === 'N') {
-            alert('댓글이 등록되지 않았습니다.');
-        } else if(result === 'E') {
-            alert('댓글 등록중 오류가 발생했습니다.');
-        }
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+                document.getElementById('contents').value = '';
+                document.getElementById('comment-password').value = '';
+
+                alert('댓글이 등록되었습니다.');
+            } else if (result === 'N') {
+                alert('댓글이 등록되지 않았습니다.');
+            } else if (result === 'E') {
+                alert('댓글 등록중 오류가 발생했습니다.');
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }

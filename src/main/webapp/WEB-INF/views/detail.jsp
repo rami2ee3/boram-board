@@ -43,7 +43,11 @@
     <ul id="comment-list" class="list-group list-group-flush">
         <c:forEach var="comments" items="${commentsList}">
             <li class="list-group-item d-flex align-items-center">
-                    ${comments.bcContents}
+                <span id="viewComment-${comments.bcId}" class="d-block">${comments.bcContents}</span>
+                <div id="editComment-${comments.bcId}" class="d-flex w-100 gap-2 d-none">
+                    <input class="w-75" type="text" value="${comments.bcContents}"/>
+                    <i class="bi bi-check-square-fill cursor"></i>
+                </div>
                 <div class="d-flex ms-auto gap-3">
                     <span class="badge bg-secondary rounded-pill">${comments.bcInsertDt}</span>
                     <i class="bi bi-pencil-square cursor" onclick="OnModifyComments('${comments.bcId}')"></i>
@@ -68,10 +72,10 @@
 </div>
 
 <form id="frmBoard" name="frmBoard" method="GET">
-    <input type="hidden" id="frmBoardBaId" name="baId" value="${boardArticleEntity.baId}">
-    <input type="hidden" id="frmBoardCurrentPageNo" name="currentPageNo" value="1">
-    <input type="hidden" id="frmBoardSearchType" name="searchType" value="">
-    <input type="hidden" id="frmBoardSearchKeyword" name="searchKeyword" value="">
+    <input type="hidden" id="frmBoardBaId" name="baId" value="${boardArticleVo.baId}">
+    <input type="hidden" id="frmBoardCurrentPageNo" name="currentPageNo" value="${boardArticleVo.currentPageNo}">
+    <input type="hidden" id="frmBoardSearchType" name="searchType" value="${boardArticleVo.searchType}">
+    <input type="hidden" id="frmBoardSearchKeyword" name="searchKeyword" value="${boardArticleVo.searchKeyword}">
 </form>
 <div class="d-flex gap-3 mt-3">
     <button type="button" class="btn btn-outline-info ms-auto" onclick="">이전</button>
