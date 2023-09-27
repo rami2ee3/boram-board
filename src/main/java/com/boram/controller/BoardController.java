@@ -9,10 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -126,6 +123,11 @@ public class BoardController {
     }
 
     // 댓글 삭제
+    @DeleteMapping
+    public @ResponseBody int deleteComment(int bcId) throws Exception {
+        return boardArticleService.deleteComment(bcId);
+    }
 
+    // 댓글 수정
 
 }

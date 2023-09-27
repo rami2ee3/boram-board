@@ -41,15 +41,30 @@ const OnDelete = () => {
 }
 
 const OnModifyComments = (bcId) => {
-    if(bcPassword.value === ''){
-        alert('패스워드를 입력해 주세요.');
+    const bcPassword = document.querySelector('#comment-password').value;
+    const enteredPassword = prompt('비밀번호를 입력하세요:');
+    if (enteredPassword === bcPassword) {
+        // 비밀번호가 일치하는 경우 수정
 
+
+    } else {
+        // 비밀번호가 일치하지 않는 경우
+        alert('비밀번호가 일치하지 않습니다.');
     }
-
 }
 
 const OnDeleteComments = (bcId) => {
-    alert(bcId);
+    const bcPassword = document.querySelector('#comment-password').value;
+    const enteredPassword = prompt('비밀번호를 입력하세요:');
+
+    if (enteredPassword === bcPassword) {
+        // 비밀번호가 일치하는 경우 삭제
+        axios.delete(`/comment_proc/${bcId}`)
+
+    } else {
+        // 비밀번호가 일치하지 않는 경우
+        alert('비밀번호가 일치하지 않습니다.');
+    }
 }
 
 // 댓글 작성
