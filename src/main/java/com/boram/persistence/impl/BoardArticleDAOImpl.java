@@ -75,7 +75,12 @@ public class BoardArticleDAOImpl implements BoardArticleDAO {
     }
 
     @Override
-    public int deleteComment(int bcID) throws Exception {
-        return sqlSession.delete(NAMESPACE + ".deleteComment", bcID);
+    public int deleteComment(BoardCommentsEntity boardCommentsEntity) throws Exception {
+        return sqlSession.delete(NAMESPACE + ".deleteComment", boardCommentsEntity);
+    }
+
+    @Override
+    public int updateComment(BoardCommentsEntity boardCommentsEntity) throws Exception {
+        return sqlSession.update(NAMESPACE + ".updateComment", boardCommentsEntity);
     }
 }

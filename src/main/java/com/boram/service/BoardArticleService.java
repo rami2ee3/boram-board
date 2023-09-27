@@ -24,5 +24,7 @@ public interface BoardArticleService {
 
     BoardCommentsEntity selectComments(int bcId) throws Exception;
 
-    int deleteComment(int bcID) throws Exception;
+    int deleteComment(BoardCommentsEntity boardCommentsEntity) throws Exception;
+
+    int updateComment(BoardCommentsEntity boardCommentsEntity) throws Exception;
 }

@@ -138,7 +138,31 @@ public class BoardArticleServiceImpl implements BoardArticleService {
     }
 
     @Override
-    public int deleteComment(int bcID) throws Exception {
-        return boardArticleDAO.deleteComment(bcID);
+    public int deleteComment(BoardCommentsEntity boardCommentsEntity) throws Exception {
+        BoardCommentsEntity orginalBoardCommentsEntity = boardArticleDAO.selectComments(boardCommentsEntity.getBcId());
+        boolean passwordMatch = bCryptPasswordEncoder.matches(
+                boardCommentsEntity.getBcPassword(),
+                orginalBoardCommentsEntity.getBcPassword());
+
+        if(passwordMatch){
+            return  boardArticleDAO.deleteComment(boardCommentsEntity);
+        } else {
+            return 0;
+        }
     }
+
+    @Override
+    public int updateComment(BoardCommentsEntity boardCommentsEntity) throws Exception {
+        BoardCommentsEntity originalBoardCommentsEntity = boardArticleDAO.selectComments(boardCommentsEntity.getBcId());
+        boolean passwordMatch = bCryptPasswordEncoder.matches(
+                boardCommentsEntity.getBcPassword(),
+                originalBoardCommentsEntity.getBcPassword());
+
+        if (passwordMatch) {
+            return boardArticleDAO.updateComment(boardCommentsEntity);
+        } else {
+            return 0;
+        }
+    }
+
 }

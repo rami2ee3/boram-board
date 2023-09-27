@@ -110,12 +110,12 @@
          WHERE ba_id = #{baId}
     </update>
 
-    <update id="updateComments" parameterType="com.boram.domain.entity.BoardCommentsEntity">
-        update board_comments
-        set bc_contents = 123456
-        where ba_id = 41;
+    <update id="updateComment" parameterType="com.boram.domain.entity.BoardCommentsEntity">
+        UPDATE board_comments
+           SET bc_contents = #{bcContents}
+         WHERE bc_id = #{bcId}
     </update>
-    
+
     <!-- delete -->
     <delete id="deleteBoard" parameterType="int">
         DELETE
@@ -123,7 +123,7 @@
          WHERE ba_id = #{ba_id}
     </delete>
 
-    <delete id="deleteComment" parameterType="int">
+    <delete id="deleteComment" parameterType="com.boram.domain.entity.BoardCommentsEntity">
         DELETE
           FROM board_comments
          WHERE bc_id = #{bc_id}

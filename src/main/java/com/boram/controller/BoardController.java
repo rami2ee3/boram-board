@@ -3,6 +3,7 @@ package com.boram.controller;
 import com.boram.domain.entity.BoardArticleEntity;
 import com.boram.domain.entity.BoardCommentsEntity;
 import com.boram.domain.vo.BoardArticleVo;
+import com.boram.domain.vo.BoardCommentsVO;
 import com.boram.service.BoardArticleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -124,11 +125,18 @@ public class BoardController {
     }
 
     // 댓글 삭제
-    @DeleteMapping
-    public @ResponseBody int deleteComment(int bcId) throws Exception {
-        return boardArticleService.deleteComment(bcId);
+    @PostMapping("delete_comment")
+    public @ResponseBody int deleteComment(BoardCommentsEntity boardCommentsEntity) throws Exception {
+        return boardArticleService.deleteComment(boardCommentsEntity);
     }
 
     // 댓글 수정
+    @PostMapping("modify_comment")
+    public String modifyComment(BoardCommentsVO vo, BoardCommentsEntity entity, HttpServletRequest request) throws Exception {
+        request.setAttribute("BoardCommentsVO", vo);
+        int result = boardArticleService.updateComment(entity);
+        logger.info("Modify Result: " + result);
+        return "redirect:/";
+    }
 
 }
